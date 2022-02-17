@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 .flex-wrapper {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
   font-family: "Outfit", sans-serif;
   font-size: 1.3rem;
   display: flex;
@@ -10,6 +13,7 @@
   align-items: baseline;
 }
 .image {
+  padding: 0;
   display: flex;
   justify-content: start;
   flex-basis: 50vw;
