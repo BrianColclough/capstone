@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 
-< lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" , initial-scale="1" />
-  <link rel="stylesheet" href="/css/index.css" />
+  <link rel="stylesheet" href="/stylesheets/header.css" />
   <title>Flix.Net</title>
 </head>
 <!-- Tabs  -->
 
 <html>
     <body>
-    <div class="tabs">
-      <a href="/">
-        <img src=";public/stylesheets/images/Flix-Logo.png" alt="Flix Logo" class="logo" />
-      </a>
 
       <div class="flex-wrapper">
-        <div class="flex-children">
-            <p>test</p>
+        <div class="image">
+            <a href="/">
+                <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo" />
+            </a>
         </div>
-      </div>
+        <div class="nav">
+            <div class="nav-child">
+                <a>Home</a>
+            </div>
+            <div class="nav-child">
+                <a>My Profile</a>
+            </div>
+            <%- if(!user){ %>
+            <div class="nav-child">
+                <a>Sign In</a>
+            </div>
+            <div class="nav-child">
+                <a>Create Account</a>
+            </div>
+            <%- } %>
+        </div>
     </div>
 
