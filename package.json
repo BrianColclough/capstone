@@ -9,7 +9,11 @@
     "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+<<<<<<< HEAD
     "ejs": "^2.6.2",
+=======
+    "ejs": "~2.6.1",
+>>>>>>> e0253c31484de089617f4f6433da45db75fab8dd
     "express": "~4.16.1",
     "express-rate-limit": "^6.2.1",
     "express-validator": "^6.14.0",
