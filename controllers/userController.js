@@ -1,7 +1,6 @@
 
 const model = require('../models/user');
-const rsvpModel = require('../models/rsvp');
-const Connection = require('../models/connection');
+
 
 
 
@@ -66,17 +65,17 @@ let password = req.body.password;
     .catch(err => next(err));
 };
 
-exports.profile = (req, res, next)=>{
-    let id = req.session.user;
-     Promise.all([model.findById(id), Connection.find({author: id}), rsvpModel.find({user: id}).populate('connection')]) //and rsvp
-    //Promise.all([model.findById(id), Connection.find({hostName: id}), rsvpModel.find({user: id}).populate('connection')]) //and rsvp
-    .then(results=>{
-        const [user, connections, rsvps] = results;
+// exports.profile = (req, res, next)=>{
+//     let id = req.session.user;
+//      Promise.all([model.findById(id), Connection.find({author: id}), rsvpModel.find({user: id}).populate('connection')]) //and rsvp
+//     //Promise.all([model.findById(id), Connection.find({hostName: id}), rsvpModel.find({user: id}).populate('connection')]) //and rsvp
+//     .then(results=>{
+//         const [user, connections, rsvps] = results;
  
-        res.render('./user/profile', {user, connections, rsvps});
-    })
-    .catch(err=>next(err));
-};
+//         res.render('./user/profile', {user, connections, rsvps});
+//     })
+//     .catch(err=>next(err));
+// };
 
 
 exports.logout = (req, res, next)=>{
