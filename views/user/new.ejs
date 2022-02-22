@@ -1,0 +1,32 @@
+<%- include('../partials/header.ejs')%>
+<link rel="stylesheet" href="/stylesheets/new.css" />
+<div class = "newTop">
+    <form action = '/users'  class="forms"method = 'POST'>
+        <table1>
+            <tr1>
+                <br> <br>
+                <td1><label for="firstName">First Name</label></td1>
+                <td1><input type="firstName" id="firstName" name="firstName" class = "fixed-width" required="First name is required"></td1>
+            </tr1>
+            <tr1>
+                <td1><label for="lastName">Last Name</label></td1>
+                <td1><input type="lastName" id="lastName" name="lastName" class = "fixed-width" required="Last name is required"></td1>
+            </tr1>
+
+            <tr1>
+                <td1><label for="email">Email Address</label></td1>
+                <td1><input type="email" id="email" name="email" class = "fixed-width" required="Email address is required"></td1>
+            </tr1>
+            <tr1>
+                <td1><label for="password">Password</label></td1>
+                <td1><input type="password" id="password" name="password" class = "fixed-width" minlength="8" maxlength ="64" required="Password is required"></td1>
+            </tr1>
+            
+            <tr1>
+                <td colspan="2" class = "align-right"><button>Sign Up</button></td1>
+            </tr1>
+        </table1>        
+    </form>
+
+    </div>
+    <%- include('../partials/footer.ejs')%>

@@ -6,7 +6,7 @@ body {
 .flex-wrapper {
   padding: 30px;
   font-family: "Outfit", sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.9rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -14,6 +14,20 @@ body {
   align-items: baseline;
   background-color: grey;
 }
+
+/* for footer smaller .flex-wrapper */
+.flex-wrappers {
+  padding: 5px;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.9rem;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  text-align: right;
+  background-color: grey;
+}
+
 .image {
   padding: 0;
   display: flex;
