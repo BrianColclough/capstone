@@ -1,0 +1,46 @@
+
+.tabs {
+    overflow: hidden;
+    background-color: #333;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    height: 40%;
+  }
+  
+  .tabs a {
+    font-size: 30px;
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    /* padding: 14px 20px; <!-- LOOOK AT -->  */ 
+  
+  padding-top:1%;
+  padding-bottom:1%;
+  padding-left: 1%;
+  padding-right:1%;
+    text-decoration: none;
+  }
+  
+  
+  
+  .tabs a.right {
+    float: right;
+  }
+  
+  
+  .tabs a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  
+  
+  .tabsRight {
+    float: right;
+  }
+  
+  
+  
