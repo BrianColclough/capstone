@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+body {
+  margin: 0px;
+}
+
+.flex-wrapper {
+  padding: 30px;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  background-color: grey;
+}
+.image {
+  padding: 0;
+  display: flex;
+  justify-content: start;
+  flex-basis: 50vw;
+}
+.nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: end;
+}
+.nav-child:hover {
+  color: red;
+}
