@@ -1,26 +1,23 @@
 
 <%- include('../partials/header.ejs')%>
-
-<div class = "newTop">
+<link rel="stylesheet" href="/stylesheets/login.css" />
     <form action = '/users/login'  class="forms" method = 'POST'>
-        <table1>
-            <tr1>
-                <br> <br>
-                <td1><label for="email">Email Address</label></td1>
-                <td1><input type="email" id="email" name="email" class = "fixed-width" required="Email address is required"></td1>
-            </tr1>
-            <tr1>
-                <td1><label for="password">Password</label></td1>
-                <td1><input type="password" id="password" name="password" class = "fixed-width" minlength="8" maxlength ="64" required="Password is required"></td1>
-            </tr1>
-            
-            <tr1>
-                <td colspan="2" class = "align-right"><button>Login</button></td>
-            </tr1>
-        </table1>        
-    </form>
-
-    </div>
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+        
+            <button type="submit">Login</button>
+          
+          </div>
+        
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="cancelbtn">Cancel</button>
+           
+          </div>
+        </form>
     <%- include('../partials/footer.ejs')%>
 
 
