@@ -6,12 +6,16 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^1.19.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^2.7.4",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+<<<<<<< HEAD
     "mongodb": "^4.4.0",
+=======
+>>>>>>> 550bcd1f354163ef04b0320530cb6edc9f89912d
     "mongoose": "^6.2.3",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15"
