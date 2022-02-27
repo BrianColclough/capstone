@@ -28,4 +28,5 @@ router.get("/newUser", function (req, res, next) {
   res.render("user/new");
 });
 
+
 module.exports = router;

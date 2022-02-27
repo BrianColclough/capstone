@@ -2,10 +2,10 @@
 
 /* Full-width input fields */
   input[type=text], input[type=password] {
-  width: 100%;
+  width: 25%;
   padding: 15px;
   margin: 5px 0 22px 0;
-  display: inline-block;
+  display: block;
   border: none;
   background: #f1f1f1;
 }
@@ -46,13 +46,21 @@ button:hover {
 .cancelbtn, .signupbtn {
   float: left;
   width: 20%;
+  
 }
 
+h1{
+  text-align: center;
+}
 
+p{
+  text-align: center;
+}
 
 /* Add padding to container elements */
 .container {
   padding: 16px;
+  
 }
 
 /* Clear floats */
