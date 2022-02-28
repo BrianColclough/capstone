@@ -9,25 +9,29 @@
 <!-- Tabs  -->
 
 <html>
-    <body>
-        <div class="flex-wrapper">
-            <div class="image">
-                <a href="/">
-                    <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo" />
-                </a>
-            </div>
-            <div class="nav">
-                <div class="nav-child">
-                    <a href='/'> Home  </a>
-                </div>
-                <div class="nav-child">
-                    <a> My Profile  </a>
-                </div>
-                <div class="nav-child">
-                    <a href='/users'> Sign In  </a>
-                </div>
-                <div class="nav-child">
-                    <a href='/users/newUser'> Create Account  </a>
-                </div>
-            </div>
+  <body>
+    <div class="flex-wrapper">
+      <div class="image">
+        <a href="/">
+          <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo" />
+        </a>
+      </div>
+      <div class="nav">
+        <div class="nav-child">
+          <a href="/"> Home </a>
         </div>
+        <%if(user){%>
+        <div class="nav-child">
+          <a> My Profile </a>
+        </div>
+        <%}%>
+        <div class="nav-child">
+          <a href="/users"> Sign In </a>
+        </div>
+        <div class="nav-child">
+          <a href="/users/newUser"> Create Account </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

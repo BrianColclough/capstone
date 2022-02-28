@@ -1,6 +1,10 @@
-<%- include('./partials/header.ejs')%>
+<% if (user){ %> <%- include('./partials/header.ejs')%> <% }else{ %> <%-
+include('./partials/header.ejs', {user:user})%> <% } %>
+
 <div>
-    <h1> Welcome to Flix.net</h1>
-   
+  <h1>Welcome to Flix.net</h1>
+  <% if (user){ %>
+  <h1><%= user.userName%></h1>
+  <% } %>
 </div>
 <%- include('./partials/footer.ejs')%>
