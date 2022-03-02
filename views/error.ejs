@@ -1,8 +1,24 @@
 <%- include('./partials/header.ejs')%>
 
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
 
+<div class = "content">
+    <h3><%= error.status%> Error</h3> 
+    <p><%= error.message%> </p>
+</div>
 
 <%- include('./partials/footer.ejs')%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
