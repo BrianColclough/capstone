@@ -3,39 +3,26 @@ var express = require("express");
 var router = express.Router();
 const User = require("../models/user");
 var bodyParser = require("body-parser");
-const controller = require('../controllers/userController');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-const router = express.Router();
+var app = express();
 
-//GET /users/new: send html form for creating a new user account
-
-router.get('/new', isGuest, controller.new);
-
-//POST /users: create a new user account
-
-router.post('/', isGuest, validateSignUp, validateResults, controller.create);
-
-//GET /users/login: send html for logging in
-router.get('/login', isGuest, controller.getUserLogin);
-
-//POST /users/login: authenticate user's login
-router.post('/login', logInLimiter, isGuest, validateLogIn, validateResults, controller.login);
-
-//GET /users/profile: send user's profile page
-router.get('/profile', isLoggedIn, controller.profile);
-
-//POST /users/logout: logout a user
-router.get('/logout', isLoggedIn, controller.logout);
-
-module.exports = router;
-
-----------
-
-
-
+router.post("/login", urlencodedParser, async function (req, res, next) {
+  if (!req.body.userName || !req.body.password) {
+    res.status("400");
+    res.send("Invalid credentails");
+  } else {
+    await User.findOne(
+      { userName: req.body.userName },
+      { password: req.body.password }
+    ).exec();
+    var newUser = { userName: req.body.userName, password: req.body.password };
+    req.session.user = newUser;
+    res.render("index", { user: newUser });
+  }
+});
 
 router.get("/", function (req, res, next) {
-  res.render("user/login");
+  res.render("user/login", { user: req.session.user });
 });
 
 router.post("/", urlencodedParser, async function (req, res, next) {
@@ -49,12 +36,12 @@ router.post("/", urlencodedParser, async function (req, res, next) {
 
   await newUser.save();
 
-  res.render("index");
+  var User = { userName: req.body.userName, password: req.body.password };
+  res.render("index", { user: User });
 });
 
 router.get("/newUser", function (req, res, next) {
   res.render("user/new");
 });
-
 
 module.exports = router;
