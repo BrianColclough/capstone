@@ -1,276 +1,267 @@
-
-  @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
-  body {
-    margin: 0px;
-  }
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+body {
+  margin: 0px;
+}
 
 .tabs {
-    overflow: hidden;
-    background-color: #333;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    height: 40%;
-  }
-  
-  .tabs a {
-    font-size: 30px;
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    border-radius: 8px;
-  padding-top:1%;
-  padding-bottom:1%;
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  height: 40%;
+}
+
+.tabs a {
+  font-size: 30px;
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  padding-top: 1%;
+  padding-bottom: 1%;
   padding-left: 1%;
-  padding-right:1%;
-    text-decoration: none;
-  }
-  
-  .tabs a.right {
-    float: right;
-  }
-  
-  .tabs a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .flex-wrapper {
-    padding: 20px;
-    font-family: "Outfit", sans-serif;
-    font-size: 1.9rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: baseline;
-    background-color: grey;
-  }
-  
-  /* for footer smaller .flex-wrapper */
-  .flex-wrappers {
-    padding: 5px;
-    font-family: "Outfit", sans-serif;
-    font-size: 1.9rem;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: baseline;
-    text-align: right;
-    background-color: grey
-  }
-  
-  .image {
-    padding: 20px;
-    display: flex;
-    justify-content: start;
-    flex-basis: 50vw;
-  }
-  .nav {
-    display: flex;
-    gap: 1rem;
-    justify-content: end;
-  }
-  .nav-child:hover {
-    color: red;
-  }
-  
-  a:-webkit-any-link {
-   
-    text-decoration: none;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  * {box-sizing: border-box}
-  
-  /* Full-width input fields */
-    input[type=text], input[type=password] {
-    width: 60%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: block;
-    border: none;
-    background: #f1f1f1;
-  }
-  
-  input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-  }
-  
-  hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-  }
-  
-  /* Set a style for all buttons */
-  button {
-    background-color: #04AA6D;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-  }
-  
-  button:hover {
-    opacity:1;
-  }
-  
-  /* Float cancel and signup buttons and add an equal width */
-  .cancelbtn, .signupbtn {
-    float: left;
-    width: 40%;
-    
-  }
-  
-  h1{
-    text-align: center;
-  }
-  
-  p{
-    text-align: center;
-  }
-  
-  /* Add padding to container elements */
-  .container {
-    padding: 16px;
-    
-  }
-  
-  /* Clear floats */
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-    text-align: center;
-  }
-  
-  
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #b4b4b4;
-  }
-  
-  tr{
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
-  }
-  
-  table, th, td {
-    border: 1px solid black;
-  }
-  
-  
-  th{
-    width: 100%;
-  }
+  padding-right: 1%;
+  text-decoration: none;
+}
 
+.tabs a.right {
+  float: right;
+}
 
-  input[type=email]{
-    width: 60%;
-  }
-  
-  input[type=password]{
-    width: 60%;
-  }
-  
-  input[type=lastName]{
-    width: 60%;
-  }
-  
-  input[type=firstName]{
-    width: 60%;
-  }
-  
-  
-  .button2:active {
-    background-color: #4D21D7;
-    box-shadow: 0 5px #EDEEDB;
-    transform: translateY(4px);
-  }
-  
-  .button2:hover {background-color: #FB2605}
-  
-  button{
-    display: inline-block;
-    padding: 10px 14px;
-    font-size: 20px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #fff;
-    background-color: #4D21D7;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 5px #EDEEDB;
-  }
-  
-  button:active {
-    background-color: #4D21D7;
-    box-shadow: 0 5px #EDEEDB;
-    transform: translateY(4px);
-  }
-  
-  button:hover {background-color: #FB2605}
-  
-  .forms{
-    padding: 11px 868px;
-    font-size: 20px;
-  }
-  
-  .form{
-    padding: 14px 900px;
-    font-size: 30px;
-  }
-  
-  .success {
-    background: rgba(108, 192, 112, 0.7);
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    padding: 10px 10px;
-  }
-  
-  .error {
-    background: rgba(255, 102, 51, 0.7);
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    padding: 10px 10px;
-  }
-  
-  
-  
-  
+.tabs a:hover {
+  background-color: #ddd;
+  color: black;
+}
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+.flex-wrapper {
+  padding: 20px;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.9rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  background-color: grey;
+}
+
+/* for footer smaller .flex-wrapper */
+.flex-wrappers {
+  padding: 5px;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.9rem;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  text-align: right;
+  background-color: grey;
+}
+
+.image {
+  padding: 20px;
+  display: flex;
+  justify-content: start;
+  flex-basis: 50vw;
+}
+.nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: end;
+}
+.nav-child:hover {
+  color: red;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Full-width input fields */
+input[type="text"],
+input[type="password"] {
+  width: 60%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04aa6d;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn,
+.signupbtn {
+  float: left;
+  width: 40%;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+  text-align: center;
+}
+/* .clearfix {
+  justify-self: end;
+} */
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #b4b4b4;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+th {
+  width: 100%;
+}
+
+input[type="email"] {
+  width: 60%;
+}
+
+input[type="password"] {
+  width: 60%;
+}
+
+input[type="lastName"] {
+  width: 60%;
+}
+
+input[type="firstName"] {
+  width: 60%;
+}
+
+.button2:active {
+  background-color: #4d21d7;
+  box-shadow: 0 5px #edeedb;
+  transform: translateY(4px);
+}
+
+.button2:hover {
+  background-color: #fb2605;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 14px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4d21d7;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #edeedb;
+}
+
+button:active {
+  background-color: #4d21d7;
+  box-shadow: 0 5px #edeedb;
+  transform: translateY(4px);
+}
+
+button:hover {
+  background-color: #fb2605;
+}
+
+.forms {
+  /* background-color: red; */
+  padding: 11px 868px;
+  font-size: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: col;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.form-children {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.success {
+  background: rgba(108, 192, 112, 0.7);
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  padding: 10px 10px;
+}
+
+.error {
+  background: rgba(255, 102, 51, 0.7);
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  padding: 10px 10px;
+}
