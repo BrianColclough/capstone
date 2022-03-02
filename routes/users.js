@@ -6,6 +6,8 @@ var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var app = express();
 
+router.get('/login', isGuest);
+
 router.post("/login", urlencodedParser, async function (req, res, next) {
   if (!req.body.userName || !req.body.password) {
     res.status("400");
@@ -43,5 +45,16 @@ router.post("/", urlencodedParser, async function (req, res, next) {
 router.get("/newUser", function (req, res, next) {
   res.render("user/new");
 });
+
+
+router.get('/logout', function (req, res){
+  req.session.destroy(function (err) {
+    res.redirect('/'); //Inside a callback… bulletproof!
+  });
+});
+
+
+
+
 
 module.exports = router;
