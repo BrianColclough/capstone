@@ -1,33 +1,66 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" , initial-scale="1" />
-  <link rel="stylesheet" href="/stylesheets/header.css" />
-  <title>Flix.Net</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" , initial-scale=1>  
+    <link rel="stylesheet" href="/stylesheets/index.css"> 
+    
+    <title> Flix.Net</title>
 </head>
+<body>
 <!-- Tabs  -->
 
-<html>
-    <body>
-        <div class="flex-wrapper">
-            <div class="image">
-                <a href="/">
-                    <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo" />
-                </a>
-            </div>
-            <div class="nav">
-                <div class="nav-child">
-                    <a href='/'> Home  </a>
-                </div>
-                <div class="nav-child">
-                    <a> My Profile  </a>
-                </div>
-                <div class="nav-child">
-                    <a href='/users'> Sign In  </a>
-                </div>
-                <div class="nav-child">
-                    <a href='/users/newUser'> Create Account  </a>
-                </div>
-            </div>
+<div class="flex-wrapper" >
+    <div class="image">
+    <a href="/" >
+    <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo">
+    </a>
+   </div>
+     <div class="nav">
+        <div class="nav-child">
+            <a href="/"> Home </a>
+          </div>
+
+  
+    <%if(!user) {%>
+        <div class="nav-child"> 
+        <a href='/users/new' > Sign Up</a>
         </div>
+        <div class="nav-child"> 
+        <a href='/users/login' >Login</a>
+        </div>
+    <%} else {%>
+        <div class="nav-child"> 
+        <a href='/users/profile' >Profile</a>
+        </div>
+        <div class="nav-child"> 
+        <a href='/users/logout'>Logout</a>
+        </div>
+    </br>
+    </br>
+</br>
+</br>
+
+
+    <%}%>
+
+    
+</div>
+</div>
+
+<% if(errorMessages.length > 0) {%>
+    <% errorMessages.forEach(message=>{%>
+        <div class='error'>
+            <%=message%>
+        </div>
+        <%});%>
+            <%}%>
+
+                <% if(successMessages.length > 0) {%>
+
+                    <% successMessages.forEach(message=>{%>
+                        <div class='success'>
+                            <%=message%>
+                        </div>
+                        <%});%>
+                            <%}%>
