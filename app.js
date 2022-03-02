@@ -1,53 +1,108 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+//require modules
+const express = require('express');
 
-var cookieParser = require("cookie-parser");
-var session = require("express-session");
+const morgan = require('morgan');
+const methodOverride = require('method-override');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
+const userRoutes = require('./routes/userRoutes');
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+//create app
+const app = express();
 
-var app = express();
+//configure app
+let port = 3000;
+let host = 'localhost';
+app.set('view engine', 'ejs');
 
-app.use(cookieParser());
-app.use(session({ secret: "secret" }));
+//connect to database
+mongoose.connect('mongodb://localhost:27017/capstone', 
+                {useNewUrlParser: true, useUnifiedTopology: true })
+.then(()=>{
+    //start app
+    app.listen(port, host, ()=>{
+        console.log('Server is running on port', port);
+    });
+})
+.catch(err=>console.log(err.message));
 
-//database stuff
-const mongoose = require("mongoose");
+// //mount middlware
+app.use(
+    session({
+        secret: "ajfeirf90aeu9eroejfoefj",
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({mongoUrl: 'mongodb://localhost:27017/capstone'}),
+        cookie: {maxAge: 60*60*1000}
+        })
+);
+app.use(flash());
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+ app.use((req, res, next) => {
+     //console.log(req.session);
+     res.locals.user = req.session.user||null;
+     res.locals.firstName = req.session.firstName||'Guest';
+     res.locals.errorMessages = req.flash('error');
+     res.locals.successMessages = req.flash('success');
+     next();
+ });
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+//mount middleware
+app.use(express.static('public'));
+app.use(express.urlencoded({extended: true}));
+app.use(morgan('tiny'));
+app.use(methodOverride('_method'));
 
-//connect to database named capstone locally
-mongoose.connect("mongodb://localhost:27017/capstone");
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+// set up routes
+app.get('/', (req, res)=>{
+    res.render('index');
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+
+
+
+app.use('/users', userRoutes);
+
+
+
+// UN COMMENT LATER
+app.use((req, res, next)=>{
+    let err = new Error('The server cannot locate' +req.url);
+        err.status = 404;
+        next(err);
+
 });
 
-module.exports = app;
+
+
+app.use((err, req, res, next)=>{
+    console.log(err.stack);
+    if (!err.status){
+        err.status = 500;
+        err.message = "Internal Server Error";
+    }
+ res.status(err.status);
+ res.render('error', {error: err});
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
