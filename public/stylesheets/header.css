@@ -43,9 +43,12 @@ body {
   color: red;
 }
 
-
 a:-webkit-any-link {
-  color: black;
-
+ 
   text-decoration: none;
 }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
