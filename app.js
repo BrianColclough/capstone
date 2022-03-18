@@ -9,6 +9,18 @@ const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const userRoutes = require('./routes/userRoutes');
 const popularRoutes = require('./routes/popular');
+const fetch = require('node-fetch');
+const apiKey = 'b85b3c13a595dcf1d03f1878600fb10e';
+
+const urls = {
+    nowPlaying: 'https://api.themoviedb.org/3/movie/now_playing?api_key=',
+    popular: 'https://api.themoviedb.org/3/movie/popular?api_key=',
+    top_rated: 'https://api.themoviedb.org/3/movie/top_rated?api_key=',
+    upcoming: 'https://api.themoviedb.org/3/movie/upcoming?api_key=',
+    singleMovieInfo: 'https://api.themoviedb.org/3/movie/',
+    movieInfobyTitle: 'https://api.themoviedb.org/3/search/movie?api_key=',
+    youtubeVideo: 'https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=',
+  };
 
 //create app
 const app = express();
@@ -59,17 +71,21 @@ app.use(methodOverride('_method'));
 
 
 // set up routes
-app.get('/', (req, res)=>{
-    res.render('index');
-});
-
-
-
+app.get('/', async (req, res) => {
+    try {
+      const popular = urls.popular + apiKey;
+      // load initial main movie
+      const response = await fetch(popular);
+      const movieData = await response.json();
+      res.render('index', { movieData });
+    } catch (e) {
+      throw e;
+    }
+  });
 
 
 app.use('/users', userRoutes);
 app.use('/popular', popularRoutes);
-
 
 
 // UN COMMENT LATER
