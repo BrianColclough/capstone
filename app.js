@@ -8,6 +8,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const userRoutes = require('./routes/userRoutes');
+const popularRoutes = require('./routes/popular');
 
 //create app
 const app = express();
@@ -67,6 +68,7 @@ app.get('/', (req, res)=>{
 
 
 app.use('/users', userRoutes);
+app.use('/popular', popularRoutes);
 
 
 
@@ -90,6 +92,7 @@ app.use((err, req, res, next)=>{
  res.render('error', {error: err});
 
 });
+
 
 
 

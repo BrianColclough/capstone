@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "common": "^0.2.5",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
     "ejs": "^3.1.6",
@@ -17,26 +18,13 @@
     "mongodb": "^4.1.3",
     "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.6",
     "req-flash": "0.0.3",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-<<<<<<< HEAD
-  "dependencies": {
-    "compat": "^1.0.4",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "ejs": "^2.7.4",
-    "express": "^4.17.3",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "nodemon": "^2.0.15"
-  }
-=======
   "author": "Rachel Altman",
   "license": "ISC"
->>>>>>> 8384bcd1c2f3339c30492141414dc33f8883c476
 }
