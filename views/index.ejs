@@ -1,12 +1,10 @@
-<% if (user){ %> <%- include('./partials/header.ejs')%> <% }else{ %> <%-
-include('./partials/header.ejs', {user:user})%> <% } %>
-
-<div>
-  <h1>Welcome to Flix.net</h1>
-  <% if (user){ %>
-  <h1><%= user.userName%></h1>
-  <% } %>
-</div>
+<%- include('./partials/header.ejs')%>
+<h1>Welcome to Flix.net</h1>
+<% if (user){ %>
+<h3 class="user-greeting">
+  Here are the most popular movies right now, <%= user.userName%>:
+</h3>
+<% } %>
 
 <div class="movie-container">
   <!-- we have an array! Called parsedData -->
@@ -31,5 +29,8 @@ include('./partials/header.ejs', {user:user})%> <% } %>
     column-gap: 30px;
     row-gap: 15px;
     align-items: center;
+  }
+  .user-greeting {
+    text-align: center;
   }
 </style>
