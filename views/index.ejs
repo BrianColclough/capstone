@@ -10,12 +10,12 @@
   <!-- we have an array! Called parsedData -->
   <% parsedData.results.forEach((movie)=>{ %>
   <div class="movie">
-    <h1><%= movie.original_title %></h1>
     <a href="/movie/<%= movie.id %>"
       ><img
         src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
         alt="Movie logo"
     /></a>
+    <h4><%= movie.original_title %></h4>
   </div>
   <% })%>
 </div>
@@ -30,6 +30,9 @@
     column-gap: 30px;
     row-gap: 15px;
     align-items: center;
+  }
+  .movie {
+    flex-basis: 16.666667%;
   }
   .user-greeting {
     text-align: center;
