@@ -1,21 +1,22 @@
-<%- include('./partials/header.ejs')%>
+<%- include('./partials/header.ejs')%> <% if (user){ %>
+<h1 class="user-greeting">Welcome to Flix.net, <%= user.userName%>:</h1>
+<% } else{ %>
 <h1>Welcome to Flix.net</h1>
-<% if (user){ %>
-<h3 class="user-greeting">
-  Here are the most popular movies right now, <%= user.userName%>:
-</h3>
 <% } %>
 
 <div class="movie-container">
   <!-- we have an array! Called parsedData -->
   <% parsedData.results.forEach((movie)=>{ %>
   <div class="movie">
-    <a href="/movie/<%= movie.id %>"
-      ><img
-        src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
-        alt="Movie logo"
-    /></a>
-    <h4><%= movie.original_title %></h4>
+    <div class="movie-contents-container">
+      <a href="/movie/<%= movie.id %>"
+        ><img
+          src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
+          alt="Movie logo"
+        />
+        <h4 class="movie-name"><%= movie.original_title %></h4>
+      </a>
+    </div>
   </div>
   <% })%>
 </div>
@@ -28,11 +29,17 @@
     flex-wrap: wrap;
     justify-content: center;
     column-gap: 30px;
-    row-gap: 15px;
+    row-gap: 35px;
     align-items: center;
   }
   .movie {
     flex-basis: 16.666667%;
+    text-align: center;
+  }
+  .movie-contents-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
   }
   .user-greeting {
     text-align: center;
