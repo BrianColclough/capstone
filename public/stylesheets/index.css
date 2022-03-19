@@ -90,7 +90,7 @@ a {
 /* Full-width input fields */
 input[type="text"],
 input[type="password"] {
-  width: 60%;
+
   padding: 15px;
   margin: 5px 0 22px 0;
   display: block;
@@ -178,21 +178,6 @@ th {
   width: 100%;
 }
 
-input[type="email"] {
-  width: 60%;
-}
-
-input[type="password"] {
-  width: 60%;
-}
-
-input[type="lastName"] {
-  width: 60%;
-}
-
-input[type="firstName"] {
-  width: 60%;
-}
 
 .button2:active {
   background-color: #4d21d7;

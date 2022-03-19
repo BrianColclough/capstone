@@ -1,5 +1,6 @@
 //require modules
 const express = require('express');
+var request = require('request');
 
 const morgan = require('morgan');
 const methodOverride = require('method-override');
@@ -76,14 +77,29 @@ app.get('/', async (req, res) => {
       const popular = urls.popular + apiKey;
       // load initial main movie
       const response = await fetch(popular);
-      const movieData = await response.json();
-      res.render('index', { movieData });
+      const parsedData = await response.json();
+      res.render('index', { parsedData });
     } catch (e) {
       throw e;
     }
   });
 
-
+  app.post('/search',(req, res, next) => {
+    // res.send("Sanity Check")
+    const userSearchTerm = encodeURI(req.body.movieSearch);
+    const movieUrl = `https://api.themoviedb.org/3/search/movie?query=${userSearchTerm}&api_key=1f809315a3a8c0a1456dd83615b4d783`
+    // res.send(movieUrl)
+    request.get(movieUrl,(error, response, movieData)=>{
+      const parsedData = JSON.parse(movieData);
+      // res.json(parsedData);
+      res.render('index', {
+        parsedData: parsedData,
+        user: req.user,
+        title: `Search Results for ${userSearchTerm} -`
+      })
+    })
+  })
+  
 app.use('/users', userRoutes);
 app.use('/popular', popularRoutes);
 

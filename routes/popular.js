@@ -1,7 +1,7 @@
 const express = require('express');
-
 const router = express.Router();
 const fetch = require('node-fetch');
+var request = require('request');
 
 const apiKey = 'b85b3c13a595dcf1d03f1878600fb10e';
 const urls = {
@@ -11,16 +11,9 @@ const urls = {
   upcoming: 'https://api.themoviedb.org/3/movie/upcoming?api_key=',
   singleMovieInfo: 'https://api.themoviedb.org/3/movie/',
   movieInfobyTitle: 'https://api.themoviedb.org/3/search/movie?api_key=',
-  youtubeVideo: 'https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=',
+  youtubeVideo: 'https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key='
 };
 
-const imgSize = {
-  img92: 'https://image.tmdb.org/t/p/w92/',
-  img130: 'https://image.tmdb.org/t/p/w130/',
-  img185: 'https://image.tmdb.org/t/p/w185/',
-  img396: 'https://image.tmdb.org/t/p/w396',
-  img500: 'https://image.tmdb.org/t/p/w500/',
-};
 
 // Index Route
 router.get('/', async (req, res) => {
@@ -28,13 +21,16 @@ router.get('/', async (req, res) => {
     const popular = urls.popular + apiKey;
     // load initial main movie
     const response = await fetch(popular);
-    const movieData = await response.json();
-    res.render('popular/index', { movieData });
+    const parsedData = await response.json();
+    res.render('index', { parsedData });
   } catch (e) {
     throw e;
   }
 });
 
+
+
+/**
 // SHOW- Show info about one movie
 router.get('/:id', async (req, res) => {
   try {
@@ -101,5 +97,7 @@ router.get('/:id', async (req, res) => {
     throw e;
   }
 });
+
+*/
 
 module.exports = router;

@@ -1,28 +1,21 @@
 <% if (user){ %> <%- include('./partials/header.ejs')%> <% }else{ %> <%-
-include('./partials/header.ejs', {user:user})%> <% } %>
+  include('./partials/header.ejs', {user:user})%> <% } %>
+  
+  
+  <div>
+    <h1>Welcome to Flix.net</h1>
+    <% if (user){ %>
+    <h1><%= user.userName%></h1>
+    <% } %>
+  </div>
 
-
-<div>
-  <h1>Welcome to Flix.net</h1>
-  <% if (user){ %>
-  <h1><%= user.userName%></h1>
-  <% } %>
-</div>
-
-<div class="row text-center" style=display:flex;flex-wrap:wrap;>
-  <% movieData.results.forEach(function(movie){ %>
-    <div class="col-md-3 col-sm-6">
-      <div>
-        <% movie.poster_path = 'https://image.tmdb.org/t/p/w370_and_h556_bestv2' +movie.poster_path %>
-          <a href="/<%= movie.title %>">
-            <img class="lozad" src="<%= movie.poster_path %>">
-          </a>
-          <div>
-            <h4><%= movie.title %></h4>
+			<div class="col-sm-12 landing-page">
+				<!-- we have an array! Called parsedData -->
+				<% parsedData.results.forEach((movie)=>{ %>
+          <div class="col-md-3 col-sm-4 poster">
+            <a href="/movie/<%= movie.id %>"><img src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>" alt="Movie logo"/></a>
           </div>
-      </div>
-    </div>
-    <% }); %>
-</div>
-
-<%- include('./partials/footer.ejs')%>
+        <% })%>
+  
+  <%- include('./partials/footer.ejs')%>
+  
