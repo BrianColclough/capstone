@@ -29,20 +29,21 @@ router.get("/", async (req, res) => {
 
 // SHOW- Show info about one movie
 router.get("/:id", async (req, res) => {
+  console.log(req.params);
   try {
     const ID = req.params.id;
     const movieInfobyTitle = `${urls.movieInfobyTitle + apiKey}&query=${ID}`;
     const response = await fetch(movieInfobyTitle);
     const foundMovie = await response.json();
     const singleMovieInfo = `${
-      urls.singleMovieInfo + foundMovie.results[0].id
+      urls.singleMovieInfo + req.params.id
     }?api_key=${apiKey}`;
     const singleMovieCredits = `${
-      urls.singleMovieInfo + foundMovie.results[0].id
+      urls.singleMovieInfo + req.params.id
     }/credits?api_key=${apiKey}`;
     const popular = urls.popular + apiKey;
-    const youtube = `http://api.themoviedb.org/3/movie/${foundMovie.results[0].id}/videos?api_key=${apiKey}&language=en-US`;
-    const recommendations = `https://api.themoviedb.org/3/movie/${foundMovie.results[0].id}/recommendations?api_key=${apiKey}&language=en-US&page=1`;
+    const youtube = `http://api.themoviedb.org/3/movie/${req.params.id}/videos?api_key=${apiKey}&language=en-US`;
+    const recommendations = `https://api.themoviedb.org/3/movie/${req.params.id}/recommendations?api_key=${apiKey}&language=en-US&page=1`;
     // singleMovieInfo
     try {
       const singleMovieRequest = await fetch(singleMovieInfo);
