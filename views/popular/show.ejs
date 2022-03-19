@@ -1,0 +1,188 @@
+
+
+  <div>
+    <% Movie.backdrop_path = 'https://image.tmdb.org/t/p/original' +Movie.backdrop_path %>
+      <img id="postertest" class="poster" src="<%= Movie.backdrop_path %>">
+  </div>
+
+  <!-- Card Container -->
+  <div class="col-xs-12 cardcont nopadding">
+    <!-- Meta Container -->
+    <div class="meta-data-container col-xs-12 col-md-8 push-md-4 col-lg-7 push-lg-5">
+      <h1><%= Movie.original_title %></h1>
+      <span class="tagline">
+        <h2><%= Movie.tagline %></h2>
+        <%= Movie.genres[0].name %> .
+          <% if(Movie.genres[1]){ %>
+              <%= Movie.genres[1].name %> |
+                <% } else { %>
+                  <p>NA</p>
+                  <% } %>
+                  <% if(Movie.spoken_languages[0].name) { %>
+                      <%= Movie.spoken_languages[0].name %> |
+                      <% } else { %>
+                        <p>English</p>
+                        <% } %>
+                      <%= Movie.runtime %> mins |
+                      <%= Movie.release_date %>
+      </span>
+      <p style='margin-top:6.5vh;'>
+        <h4>
+          SYNOPSIS
+        </h4>
+        <%= Movie.overview %>
+      </p>
+
+      <!-- additional-details -->
+      <div class="additional-details">
+        <span class="genre-list"></span>
+        <span class="production-list"></span>
+        <div class="nopadding release-details">
+          <div class="col-xs-6">
+            Directed by:
+            <% var obj = Credit.crew.find(o => o.job === 'Director') %>
+              <span class="meta-data"><%= obj.name %></span>
+          </div>
+          <div class="col-xs-6">
+            Produced by:
+            <% if (obj = Credit.crew.find(o => o.job === 'Producer')) { %>
+              <span class="meta-data"><%= obj.name %></span>
+              <% } else { %>
+                <span class="meta-data">NA</span>
+                <% } %>
+          </div>
+          <div class="col-xs-6">
+            Box Office:
+            <span class="meta-data"><%=Movie.revenue %>
+                  </span>
+          </div>
+          <div class="col-xs-6">
+            Vote Average:
+            <span class="meta-data"><%= Movie.vote_average %> / 10</span>
+          </div>
+          <div class="col-xs-6">
+            <button type="button" class="btn btn-red btn-lg" data-toggle="modal" data-target="#myModal">Watch Trailer</button>
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="video-container">
+                      <% if (Video.results[0]) { %>
+                        <div><iframe width="640" height="360" class="youtube" src="https://www.youtube.com/embed/<%= Video.results[0].key %>" allowfullscreen=""></iframe></div>
+                        <% } else { %>
+                          <div><iframe width="640" height="360" class="youtube" src="https://www.youtube.com/" allowfullscreen=""></iframe></div>
+                          <% } %>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                <!-- Modal Content -->
+
+
+
+
+              </div>
+            </div>
+            <!-- Modal -->
+          </div>
+          <div class="col-xs-6">
+            <a href="/nowplaying" class="btn-lg btn-green">View More</a>
+          </div>
+        </div>
+      </div>
+      <!-- additional-details -->
+
+    </div>
+    <!-- Meta Container -->
+    <div class="poster-container nopadding col-xs-12 col-md-4 pull-md-8 col-lg-5 pull-lg-7 ">
+      <% Movie.poster_path = 'https://image.tmdb.org/t/p/w500' +Movie.poster_path %>
+        <img class="poster" src="<%= Movie.poster_path %>">
+    </div>
+  </div>
+  <!-- Card Container -->
+
+  <!-- Cast Description -->
+  <div class="col-xs-12 cardcont nopadding">
+    <div class="wrapper">
+      <h3>STARRING</h3>
+      <div style="margin-top:50px;" class="row row-flex">
+        <%
+          var cast = Credit.cast.slice(1, 9)
+          for(var i = 0; i < cast.length; i++) {
+        %>
+          <div class="col-md-3">
+            <div class="responsive-circle">
+              <% var obj = Credit.cast[i].profile_path %>
+                <% var Poster_Path = 'https://image.tmdb.org/t/p/w500' +obj %>
+                  <div>
+                    <img src="<%= Poster_Path %>" class="image--cover">
+                    <figcaption>
+                      <%= Credit.cast[i].name %>
+                    </figcaption>
+                  </div>
+            </div>
+          </div>
+          <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommendations -->
+  <div class="col-xs-12 cardcont nopadding">
+    <div class="wrapper">
+      <h3>People who liked this also liked...</h3>
+      <div class="container">
+        <div class="row row-flex fivecolumns">
+          <%
+            var reco = Recommend.results.slice(1, 12)
+            for(var i = 0; i < reco.length; i++) {
+          %>
+            <div class="span2">
+              <% Recommend.results[i].poster_path = 'https://image.tmdb.org/t/p/w500' +Recommend.results[i].poster_path %>
+                <img class="img-responsive" src="<%= Recommend.results[i].poster_path %>" id="movie-summary-img"><br>
+                <figcaption>
+                  <%= Recommend.results[i].title %>
+                </figcaption>
+            </div>
+            <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider -->
+  <div class="col-xs-12 cardcont nopadding">
+    <div class="wrapper slick-slider">
+      <h3>Currently Playing</h3>
+      <div class="slider">
+        <% currPopular.results[0].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[0].poster_path %>
+          <div><img src="<%= currPopular.results[0].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+          <% currPopular.results[1].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[1].poster_path %>
+            <div><img src="<%= currPopular.results[1].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+            <% currPopular.results[2].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[2].poster_path %>
+              <div><img src="<%= currPopular.results[2].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+              <% currPopular.results[3].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[3].poster_path %>
+                <div><img src="<%= currPopular.results[3].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+                <% currPopular.results[4].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[4].poster_path %>
+                  <div><img src="<%= currPopular.results[4].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+                  <% currPopular.results[5].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[5].poster_path %>
+                    <div><img src="<%= currPopular.results[5].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+                    <% currPopular.results[6].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[6].poster_path %>
+                      <div><img src="<%= currPopular.results[6].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+                      <% currPopular.results[7].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[7].poster_path %>
+                        <div><img src="<%= currPopular.results[7].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+                        <% currPopular.results[8].poster_path = 'https://image.tmdb.org/t/p/w500' +currPopular.results[8].poster_path %>
+                          <div><img src="<%= currPopular.results[8].poster_path %>" alt="" class="img-responsive" id="movie-summary-img"></div>
+      </div>
+    </div>
+  </div>
+

@@ -1,10 +1,36 @@
-<% if (user){ %> <%- include('./partials/header.ejs')%> <% }else{ %> <%-
-include('./partials/header.ejs', {user:user})%> <% } %>
+<%- include('./partials/header.ejs')%>
+<h1>Welcome to Flix.net</h1>
+<% if (user){ %>
+<h3 class="user-greeting">
+  Here are the most popular movies right now, <%= user.userName%>:
+</h3>
+<% } %>
 
-<div>
-  <h1>Welcome to Flix.net</h1>
-  <% if (user){ %>
-  <h1><%= user.userName%></h1>
-  <% } %>
+<div class="movie-container">
+  <!-- we have an array! Called parsedData -->
+  <% parsedData.results.forEach((movie)=>{ %>
+  <div class="movie">
+    <a href="/movie/<%= movie.id %>"
+      ><img
+        src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
+        alt="Movie logo"
+    /></a>
+  </div>
+  <% })%>
 </div>
+
 <%- include('./partials/footer.ejs')%>
+<style>
+  .movie-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 30px;
+    row-gap: 15px;
+    align-items: center;
+  }
+  .user-greeting {
+    text-align: center;
+  }
+</style>
