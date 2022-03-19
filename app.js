@@ -72,6 +72,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.use(methodOverride("_method"));
 
+app.use("/users", userRoutes);
+app.use("/popular", popularRoutes);
+app.use("/movie", popularRoutes);
+
 // set up routes
 app.get("/", async (req, res) => {
   try {
@@ -100,10 +104,6 @@ app.post("/search", (req, res, next) => {
     });
   });
 });
-
-app.use("/users", userRoutes);
-app.use("/popular", popularRoutes);
-
 // UN COMMENT LATER
 app.use((req, res, next) => {
   let err = new Error("The server cannot locate" + req.url);
