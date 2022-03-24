@@ -7,6 +7,8 @@
   </div>
 </div>
 
+<img src="/images/heart-unfilled.png" alt="heart" class="not-liked">
+
 <!--Overall Flex Container-->
 <div class="page-container">
   <div class="flex-container">
@@ -28,6 +30,8 @@
             <% } %> Runtime: <%= Movie.runtime %> mins | Release Date: <%=
             Movie.release_date %>
           </span>
+          <img src="/images/heart-unfilled.png" alt="heart" class="not-liked">
+
           <h4>SYNOPSIS</h4>
           <%= Movie.overview %>
 
