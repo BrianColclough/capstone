@@ -1,11 +1,4 @@
 <%- include('../partials/header.ejs')%>
-<div class="header-container">
-  <div>
-    <% Movie.backdrop_path = 'https://image.tmdb.org/t/p/original'
-    +Movie.backdrop_path %>
-    <img id="postertest" class="poster" src="<%= Movie.backdrop_path %>" />
-  </div>
-</div>
 
 <!--Overall Flex Container-->
 <div class="page-container">
@@ -16,6 +9,12 @@
       <h1 class="title"><%= Movie.original_title %></h1>
       <!-- Details and Trailer Container-->
       <div class="details-trailer-container">
+        <!-- Meta Container -->
+        <div class="poster-flex">
+          <% Movie.poster_path = 'https://image.tmdb.org/t/p/w500'
+          +Movie.poster_path %>
+          <img class="cast-poster" src="<%= Movie.poster_path %>" />
+        </div>
         <div class="details-container">
           <span class="tagline">
             <h2><%= Movie.tagline %></h2>
@@ -56,40 +55,6 @@
             </div>
           </div>
         </div>
-        <!-- Modal -->
-        <div id="myModal" class="trailer-container" role="dialog">
-          <!-- Modal content-->
-          <div class="modal-header">
-            <h4 class="modal-title">Movie Clip</h4>
-          </div>
-          <div class="modal-body">
-            <div class="video-container">
-              <% if (Video.results[0]) { %>
-              <div>
-                <iframe
-                  width="480"
-                  height="270"
-                  class="youtube"
-                  src="https://www.youtube.com/embed/<%= Video.results[0].key %>"
-                  allowfullscreen=""
-                ></iframe>
-              </div>
-              <% } else { %>
-              <div>
-                <iframe
-                  width="640"
-                  height="360"
-                  class="youtube"
-                  src="https://www.youtube.com/"
-                  allowfullscreen=""
-                ></iframe>
-              </div>
-              <% } %>
-            </div>
-          </div>
-          <!-- Modal Content -->
-          <!-- Modal -->
-        </div>
       </div>
       <!-- End details and trailer container-->
 
@@ -99,11 +64,39 @@
 
     <!-- Poster and cast container-->
     <div class="poster-cast-container">
-      <!-- Meta Container -->
-      <div class="poster-flex">
-        <% Movie.poster_path = 'https://image.tmdb.org/t/p/w500'
-        +Movie.poster_path %>
-        <img class="cast-poster" src="<%= Movie.poster_path %>" />
+      <!-- Modal -->
+      <div id="myModal" class="trailer-container" role="dialog">
+        <!-- Modal content-->
+        <div class="modal-header">
+          <h4 class="modal-title">Movie Clip</h4>
+        </div>
+        <div class="modal-body">
+          <div class="video-container">
+            <% if (Video.results[0]) { %>
+            <div>
+              <iframe
+                width="480"
+                height="270"
+                class="youtube"
+                src="https://www.youtube.com/embed/<%= Video.results[0].key %>"
+                allowfullscreen=""
+              ></iframe>
+            </div>
+            <% } else { %>
+            <div>
+              <iframe
+                width="640"
+                height="360"
+                class="youtube"
+                src="https://www.youtube.com/"
+                allowfullscreen=""
+              ></iframe>
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <!-- Modal Content -->
+        <!-- Modal -->
       </div>
       <!-- Cast Description -->
       <div>
@@ -268,6 +261,7 @@
     display: flex;
     flex-direction: column;
     max-width: 70rem;
+    padding-top: 2rem;
   }
   .title {
     padding-bottom: 0;
@@ -280,12 +274,11 @@
     gap: 15px;
   }
   .details-trailer-container {
-    padding-bottom: 3rem;
     display: flex;
-    row-gap: 0.5rem;
+    padding: 3rem;
   }
   .details-container {
-    padding-right: 1.5rem;
+    padding-left: 1.5rem;
     display: flex;
     flex-direction: column;
   }
@@ -306,6 +299,7 @@
   .cast-poster {
     justify-self: center;
     border-radius: 0.375rem;
+    max-height: 25rem;
   }
   .cast-item {
     flex-basis: 15%;
@@ -330,5 +324,9 @@
   .reccomendation-poster {
     max-width: 13rem;
     border-radius: 0.375rem;
+  }
+  .card-container {
+    border-radius: 1rem;
+    background-color: lightgray;
   }
 </style>
