@@ -1,6 +1,9 @@
+const express = require("express");
+const router = express.Router();
 const model = require("../models/user");
 const rsvpModel = require("../models/rsvp");
 const Connection = require("../models/connection");
+
 
 exports.new = (req, res) => {
   return res.render("./user/new");
@@ -76,6 +79,7 @@ exports.profile = (req, res, next) => {
     })
     .catch((err) => next(err));
 };
+
 
 exports.logout = (req, res, next) => {
   req.session.destroy((err) => {

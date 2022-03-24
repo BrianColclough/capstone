@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const model = require("../models/user");
 const fetch = require("node-fetch");
 var request = require("request");
 
@@ -91,6 +92,14 @@ router.get("/:id", async (req, res) => {
   } catch (e) {
     throw e;
   }
+});
+
+router.get('/liked/:id', async (req, res) => {
+  const ID = req.params.id;
+  //model.updateOne( {$push : {likedMovie : ID}});
+  model.findOneAndUpdate({_id: req.session.user},{$push: {likedMovie : ID}});
+  console.log(model);
+  res.redirect('/movie/' + ID);
 });
 
 module.exports = router;
