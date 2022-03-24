@@ -13,36 +13,33 @@
     <!-- Card Container -->
     <div class="card-container">
       <!-- Meta Container -->
-      <div
-        class="meta-data-container col-xs-12 col-md-8 push-md-4 col-lg-7 push-lg-5"
-      >
-        <h1 class="title"><%= Movie.original_title %></h1>
-        <span class="tagline">
-          <h2><%= Movie.tagline %></h2>
-          <%= Movie.genres[0].name %> | <% if(Movie.genres[1]){ %> <%=
-          Movie.genres[1].name %> | <% } else { %>
-          <p>NA</p>
-          <% } %> <% if(Movie.spoken_languages[0].name) { %> <%=
-          Movie.spoken_languages[0].name %> | <% } else { %>
-          <p>English</p>
-          <% } %> Runtime: <%= Movie.runtime %> mins | Release Date: <%=
-          Movie.release_date %>
-        </span>
-        <h4>SYNOPSIS</h4>
-        <%= Movie.overview %>
+      <h1 class="title"><%= Movie.original_title %></h1>
+      <!-- Details and Trailer Container-->
+      <div class="details-trailer-container">
+        <div class="details-container">
+          <span class="tagline">
+            <h2><%= Movie.tagline %></h2>
+            <%= Movie.genres[0].name %> | <% if(Movie.genres[1]){ %> <%=
+            Movie.genres[1].name %> | <% } else { %>
+            <p>NA</p>
+            <% } %> <% if(Movie.spoken_languages[0].name) { %> <%=
+            Movie.spoken_languages[0].name %> | <% } else { %>
+            <p>English</p>
+            <% } %> Runtime: <%= Movie.runtime %> mins | Release Date: <%=
+            Movie.release_date %>
+          </span>
+          <h4>SYNOPSIS</h4>
+          <%= Movie.overview %>
 
-        <!-- additional-details -->
-        <div class="additional-details">
-          <span class="genre-list"></span>
-          <span class="production-list"></span>
-          <div class="nopadding release-details">
+          <!-- additional-details -->
+          <div class="additional-details">
             <div class="col-xs-6">
-              Directed by: <% var obj = Credit.crew.find(o => o.job ===
+              <b>Directed by:</b> <% var obj = Credit.crew.find(o => o.job ===
               'Director') %>
               <span class="meta-data"><%= obj.name %></span>
             </div>
-            <div class="col-xs-6">
-              Produced by: <% if (obj = Credit.crew.find(o => o.job ===
+            <div class="production-details">
+              <b>Produced by:</b> <% if (obj = Credit.crew.find(o => o.job ===
               'Producer')) { %>
               <span class="meta-data"><%= obj.name %></span>
               <% } else { %>
@@ -50,88 +47,53 @@
               <% } %>
             </div>
             <div class="col-xs-6">
-              Box Office:
+              <b> Box Office:</b>
               <span class="meta-data"><%=Movie.revenue %> </span>
             </div>
             <div class="col-xs-6">
-              Vote Average:
+              <b> Vote Average: </b>
               <span class="meta-data"><%= Movie.vote_average %> / 10</span>
             </div>
-            <div class="col-xs-6">
-              <%#
-              <button
-                type="button"
-                class="btn btn-red btn-lg"
-                data-toggle="modal"
-                data-target="#myModal"
-              >
-                Watch Trailer
-              </button>
-              %>
-              <!-- Modal -->
-              <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <%#
-                      <button type="button" class="close" data-dismiss="modal">
-                        &times;
-                      </button>
-                      %>
-                      <h4 class="modal-title">Movie Trailer</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="video-container">
-                        <% if (Video.results[0]) { %>
-                        <div>
-                          <iframe
-                            width="640"
-                            height="360"
-                            class="youtube"
-                            src="https://www.youtube.com/embed/<%= Video.results[0].key %>"
-                            allowfullscreen=""
-                          ></iframe>
-                        </div>
-                        <% } else { %>
-                        <div>
-                          <iframe
-                            width="640"
-                            height="360"
-                            class="youtube"
-                            src="https://www.youtube.com/"
-                            allowfullscreen=""
-                          ></iframe>
-                        </div>
-                        <% } %>
-                      </div>
-                    </div>
-                    <%#
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-default"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                    </div>
-                    %>
-                  </div>
-                  <!-- Modal Content -->
-                </div>
-              </div>
-              <!-- Modal -->
-            </div>
-            <%#
-            <div class="col-xs-6">
-              <a href="/nowplaying" class="btn-lg btn-green">View More</a>
-            </div>
-            %>
           </div>
         </div>
-        <!-- additional-details -->
+        <!-- Modal -->
+        <div id="myModal" class="trailer-container" role="dialog">
+          <!-- Modal content-->
+          <div class="modal-header">
+            <h4 class="modal-title">Movie Clip</h4>
+          </div>
+          <div class="modal-body">
+            <div class="video-container">
+              <% if (Video.results[0]) { %>
+              <div>
+                <iframe
+                  width="480"
+                  height="270"
+                  class="youtube"
+                  src="https://www.youtube.com/embed/<%= Video.results[0].key %>"
+                  allowfullscreen=""
+                ></iframe>
+              </div>
+              <% } else { %>
+              <div>
+                <iframe
+                  width="640"
+                  height="360"
+                  class="youtube"
+                  src="https://www.youtube.com/"
+                  allowfullscreen=""
+                ></iframe>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <!-- Modal Content -->
+          <!-- Modal -->
+        </div>
       </div>
+      <!-- End details and trailer container-->
+
+      <!-- additional-details -->
     </div>
     <!-- Card Container -->
 
@@ -141,7 +103,7 @@
       <div class="poster-flex">
         <% Movie.poster_path = 'https://image.tmdb.org/t/p/w500'
         +Movie.poster_path %>
-        <img class="poster" src="<%= Movie.poster_path %>" />
+        <img class="cast-poster" src="<%= Movie.poster_path %>" />
       </div>
       <!-- Cast Description -->
       <div>
@@ -164,139 +126,122 @@
     <!-- End Poster and Cast Container-->
 
     <!-- Recommendations -->
-    <div class="col-xs-12 cardcont nopadding">
-      <div class="wrapper">
-        <h3>People who liked this also liked...</h3>
-        <div class="container">
-          <div class="row row-flex fivecolumns">
-            <% var reco = Recommend.results.slice(1, 12) %> <% for(var i = 0; i
-            < reco.length; i++) { %>
-            <div class="span2">
-              <% Recommend.results[i].poster_path =
-              'https://image.tmdb.org/t/p/w500'
-              +Recommend.results[i].poster_path %>
-              <img
-                class="img-responsive"
-                src="<%= Recommend.results[i].poster_path %>"
-                id="movie-summary-img"
-              /><br />
-              <figcaption><%= Recommend.results[i].title %></figcaption>
-            </div>
-            <% } %>
-          </div>
+    <div>
+      <h2>People who liked this also liked...</h2>
+      <div class="reccomendations-container">
+        <% var reco = Recommend.results.slice(1, 12) %> <% for(var i = 0; i <
+        reco.length; i++) { %> <% Recommend.results[i].poster_path =
+        'https://image.tmdb.org/t/p/w500' +Recommend.results[i].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            class="reccomendation-poster"
+            src="<%= Recommend.results[i].poster_path %>"
+            id="movie-summary-img"
+          /><br />
+          <figcaption><%= Recommend.results[i].title %></figcaption>
         </div>
+        <% } %>
       </div>
     </div>
     <!-- End Reccomendations-->
 
-    <!-- Slider -->
-    <div class="col-xs-12 cardcont nopadding">
-      <div class="wrapper slick-slider">
-        <h3>Currently Playing</h3>
-        <div class="slider">
-          <% currPopular.results[0].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[0].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[0].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
-          <% currPopular.results[1].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[1].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[1].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
-          <% currPopular.results[2].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[2].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[2].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
-          <% currPopular.results[3].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[3].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[3].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
-          <% currPopular.results[4].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[4].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[4].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
-          <% currPopular.results[5].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[5].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[5].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
-          <% currPopular.results[6].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[6].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[6].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
-          <% currPopular.results[7].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[7].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[7].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
-          <% currPopular.results[8].poster_path =
-          'https://image.tmdb.org/t/p/w500' +currPopular.results[8].poster_path
-          %>
-          <div>
-            <img
-              src="<%= currPopular.results[8].poster_path %>"
-              alt=""
-              class="img-responsive"
-              id="movie-summary-img"
-            />
-          </div>
+    <!-- Currently playing  -->
+    <div class="currently-playing-container">
+      <h2>Currently Playing</h2>
+      <div class="reccomendations-container">
+        <% currPopular.results[0].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[0].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[0].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
+        </div>
+        <% currPopular.results[1].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[1].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[1].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
+        </div>
+        <% currPopular.results[2].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[2].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[2].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
+        </div>
+        <% currPopular.results[3].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[3].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[3].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
+        </div>
+        <% currPopular.results[4].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[4].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[4].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
+        </div>
+        <% currPopular.results[5].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[5].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[5].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
+        </div>
+        <% currPopular.results[6].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[6].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[6].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
+        </div>
+        <% currPopular.results[7].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[7].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[7].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
+        </div>
+        <% currPopular.results[8].poster_path =
+        'https://image.tmdb.org/t/p/w500' +currPopular.results[8].poster_path %>
+        <div class="reccomendation-poster-container">
+          <img
+            src="<%= currPopular.results[8].poster_path %>"
+            alt=""
+            class="reccomendation-poster"
+            id="movie-summary-img"
+          />
         </div>
       </div>
     </div>
-    <!-- End Slider -->
+    <!-- End currently playing -->
   </div>
 </div>
 <!-- End Flex Container-->
@@ -309,7 +254,9 @@
   }
   .poster {
     justify-self: center;
-    max-width: 70rem;
+    max-height: 30rem;
+    width: 80rem;
+    object-fit: cover;
   }
 
   .page-container {
@@ -332,6 +279,19 @@
     flex-direction: row;
     gap: 15px;
   }
+  .details-trailer-container {
+    padding-bottom: 3rem;
+    display: flex;
+    row-gap: 0.5rem;
+  }
+  .details-container {
+    padding-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .production-details {
+    padding-top: 0.5rem;
+  }
   .poster-flex {
     flex-basis: 20%;
   }
@@ -339,17 +299,36 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     row-gap: 20px;
     text-align: center;
   }
+  .cast-poster {
+    justify-self: center;
+    border-radius: 0.375rem;
+  }
   .cast-item {
     flex-basis: 15%;
-    padding: 0.5rem;
+    padding: 1rem;
   }
   .image-cover {
     max-width: 100px;
     border-radius: 9999px;
     padding-bottom: 5px;
+  }
+  .reccomendations-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 10px;
+  }
+  .reccomendation-poster-container {
+    flex-basis: 20%;
+    text-align: center;
+  }
+  .reccomendation-poster {
+    max-width: 13rem;
+    border-radius: 0.375rem;
   }
 </style>
