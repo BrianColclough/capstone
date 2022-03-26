@@ -4,7 +4,6 @@ const model = require("../models/user");
 const rsvpModel = require("../models/rsvp");
 const Connection = require("../models/connection");
 
-
 exports.new = (req, res) => {
   return res.render("./user/new");
 };
@@ -65,6 +64,7 @@ exports.login = (req, res, next) => {
 };
 
 exports.profile = (req, res, next) => {
+  console.log(req.session.user);
   let id = req.session.user;
   Promise.all([
     model.findById(id),
@@ -79,7 +79,6 @@ exports.profile = (req, res, next) => {
     })
     .catch((err) => next(err));
 };
-
 
 exports.logout = (req, res, next) => {
   req.session.destroy((err) => {
