@@ -30,14 +30,20 @@
             <% } %> Runtime: <%= Movie.runtime %> mins | Release Date: <%=
             Movie.release_date %>
 
-            <% if (user.likedMovies.includes(Movie.id)) {%>
+
+            <% if (user) {%>
+              <% if (user.likedMovies.includes(Movie.id)) {%>
               <a href="/movie/unliked/ <%=Movie.id %>">
                 <img src="/images/heart-filled.png" class="heartImage"/>
               </a>
-              <% } else{ %>
+              <% } else { %>
               <a href="/movie/liked/<%= Movie.id %>">
                 <img src="/images/heart-unfilled.png"  class="heartImage" /></a>
+              </a>
               <% } %>
+            <% } %>
+
+           
           </span>
           <div class="synopsis">
             <div class="synopsis-heading">SYNOPSIS</div>
@@ -255,106 +261,4 @@
 <!-- End Flex Container-->
 <%- include('../partials/footer.ejs')%>
 
-<!--Begin Styles-->
-<style>
-  .header-container {
-    padding-top: 10px;
-    display: flex;
-    justify-content: center;
-  }
-  .poster {
-    justify-self: center;
-    max-height: 30rem;
-    width: 80rem;
-    object-fit: cover;
-  }
 
-  .page-container {
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-  }
-  .flex-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 70rem;
-    padding-top: 2rem;
-  }
-  .title {
-    padding-bottom: 0;
-  }
-  .poster-cast-container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-  }
-  .details-trailer-container {
-    display: flex;
-    padding: 3rem;
-  }
-  .details-container {
-    padding-left: 1.5rem;
-    display: flex;
-    flex-direction: column;
-  }
-  .production-details {
-    padding-bottom: 0.5rem;
-  }
-  .poster-flex {
-    flex-basis: 20%;
-  }
-  .cast {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    row-gap: 20px;
-    text-align: center;
-  }
-  .cast-poster {
-    justify-self: center;
-    border-radius: 0.375rem;
-    max-height: 25rem;
-  }
-  .cast-item {
-    flex-basis: 15%;
-    padding: 1rem;
-  }
-  .image-cover {
-    max-width: 100px;
-    border-radius: 9999px;
-    padding-bottom: 5px;
-  }
-  .reccomendations-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    column-gap: 10px;
-  }
-  .reccomendation-poster-container {
-    flex-basis: 20%;
-    text-align: center;
-  }
-  .reccomendation-poster {
-    max-width: 13rem;
-    border-radius: 0.375rem;
-  }
-  .card-container {
-    border-radius: 1rem;
-    background-color: lightgray;
-  }
-  .overview {
-    padding-bottom: 0.5rem;
-  }
-  .synopsis {
-    padding-bottom: 0.5rem;
-    padding-top: 0.5rem;
-  }
-  .synopsis-heading {
-    font-weight: 600;
-    padding-bottom: 3px;
-  }
-</style>
