@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
 
 // SHOW- Show info about one movie
 router.get("/:id", async (req, res) => {
-  //console.log(req.session.user);
+  console.log(req.session.user);
   try {
     const ID = req.params.id;
     const movieInfobyTitle = `${urls.movieInfobyTitle + apiKey}&query=${ID}`;
@@ -88,7 +88,7 @@ router.get("/:id", async (req, res) => {
       Recommend: recommend,
       currPopular,
       layout: false,
-      session: req.session.user,
+      user: req.session.user,
     });
   } catch (e) {
     throw e;
@@ -97,14 +97,17 @@ router.get("/:id", async (req, res) => {
 
 router.get("/liked/:id", (req, res) => {
   const ID = req.params.id;
-  console.log(req.session.user._id);
+  //   console.log(req.session.user._id);
   model
     .findOneAndUpdate(
       { _id: req.session.user },
       { $push: { likedMovies: ID } },
       { upsert: true }
     )
-    .then(res.redirect("/movie/" + ID));
+    .then((user) => {
+      req.session.user = user;
+      res.redirect("/movie/" + ID);
+    });
 });
 
 module.exports = router;
