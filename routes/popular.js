@@ -15,6 +15,8 @@ const urls = {
   movieInfobyTitle: "https://api.themoviedb.org/3/search/movie?api_key=",
   youtubeVideo: "https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=",
 };
+//session
+var sessionUser = null;
 
 // Index Route
 router.get("/", async (req, res) => {
@@ -31,7 +33,11 @@ router.get("/", async (req, res) => {
 
 // SHOW- Show info about one movie
 router.get("/:id", async (req, res) => {
-  console.log(req.session.user);
+  if (sessionUser != req.session.user && sessionUser) {
+    req.session.user = sessionUser;
+  }
+  //   console.log("session on movie page");
+  //   console.log(req.session.user);
   try {
     const ID = req.params.id;
     const movieInfobyTitle = `${urls.movieInfobyTitle + apiKey}&query=${ID}`;
@@ -97,7 +103,8 @@ router.get("/:id", async (req, res) => {
 
 router.get("/liked/:id", (req, res) => {
   const ID = req.params.id;
-  //   console.log(req.session.user._id);
+  //   console.log("session User");
+  //   console.log(req.session.user);
   model
     .findOneAndUpdate(
       { _id: req.session.user },
@@ -105,9 +112,21 @@ router.get("/liked/:id", (req, res) => {
       { upsert: true }
     )
     .then((user) => {
-      req.session.user = user;
-      res.redirect("/movie/" + ID);
+      sessionUser = user;
     });
+  res.redirect("/movie/" + ID);
+});
+
+router.get("/unliked/:id", (req, res) => {
+  const ID = req.params.id;
+  console.log("session User");
+  console.log(req.session.user);
+  model
+    .findOneAndUpdate({ _id: req.session.user }, { $pull: { likedMovies: ID } })
+    .then((user) => {
+      sessionUser = user;
+    });
+  res.redirect("/movie/" + ID);
 });
 
 module.exports = router;
