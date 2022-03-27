@@ -1,43 +1,17 @@
 {
-<<<<<<< Updated upstream
-  "name": "myapp",
-  "version": "0.0.0",
-  "private": true,
-=======
-  "name": "project-2",
-  "version": "1.0.0",
-  "description": "Project 2",
-  "main": "app.js",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "common": "^0.2.5",
-    "connect-flash": "^0.1.1",
-    "connect-mongo": "^4.6.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.3",
-    "express-rate-limit": "^5.5.1",
-    "express-session": "^1.17.2",
-    "express-validator": "^6.13.0",
-    "luxon": "^2.3.0",
-    "method-override": "^3.0.0",
-    "mongodb": "^4.1.3",
-    "mongoose": "^6.0.12",
-    "morgan": "^1.10.0",
-    "node-fetch": "^2.6.6",
-    "req-flash": "0.0.3",
-    "request": "^2.88.2",
-    "uuid": "^8.3.2"
-  },
->>>>>>> Stashed changes
-  "scripts": {
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "ejs": "^2.6.2",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
-  }
+    "name": "project-2",
+    "version": "1.0.0",
+    "description": "Project 2",
+    "main": "app.js",
+    "dependencies": {
+        "cookie-parser": "~1.4.4",
+        "debug": "~2.6.9",
+        "ejs": "^2.6.2",
+        "express": "~4.16.1",
+        "http-errors": "~1.6.3",
+        "morgan": "~1.9.1"
+    },
+    "scripts": {
+        "start": "node ./bin/www"
+    }
 }
