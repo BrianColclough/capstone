@@ -9,6 +9,15 @@
     <div class="card-container">
       <!-- Meta Container -->
       <h1 class="title"><%= Movie.original_title %></h1>
+      <% if (user.likedMovies.includes(Movie.id)) {%>
+      <a href="/movie/unliked/ <%=Movie.id %>">
+        <img src="/images/liked.png" />
+      </a>
+      <% } else{ %>
+      <a href="/movie/liked/<%= Movie.id %>"
+        ><img src="/images/unliked.png"
+      /></a>
+      <% } %>
       <!-- Details and Trailer Container-->
       <div class="details-trailer-container">
         <!-- Meta Container -->
@@ -29,14 +38,14 @@
             <% } %> Runtime: <%= Movie.runtime %> mins | Release Date: <%=
             Movie.release_date %>
           </span>
-        
+          <div class="synopsis">
+            <div class="synopsis-heading">SYNOPSIS</div>
+            <div class="overview"><%= Movie.overview %></div>
+          </div>
 
-          <h4>SYNOPSIS</h4>
-          <%= Movie.overview %>
-         
           <!-- additional-details -->
           <div class="additional-details">
-            <div class="col-xs-6">
+            <div class="overview">
               <b>Directed by:</b> <% var obj = Credit.crew.find(o => o.job ===
               'Director') %>
               <span class="meta-data"><%= obj.name %></span>
@@ -49,11 +58,11 @@
               <span class="meta-data">NA</span>
               <% } %>        
             </div>
-            <div class="col-xs-6">
+            <div class="overview">
               <b> Box Office:</b>
               <span class="meta-data"><%=Movie.revenue %> </span>
-            </div>            <br>
-            <div class="col-xs-6">
+            </div>
+            <div class="overview">
               <b> Vote Average: </b>
               <span class="meta-data"><%= Movie.vote_average %> / 10</span>
             </div>     
@@ -242,8 +251,14 @@
   </div>
 </div>
 <!-- End Flex Container-->
+<<<<<<< HEAD
 <%- include('../partials/footer.ejs')%> 
 <!-- Style-->
+=======
+<%- include('../partials/footer.ejs')%>
+
+<!--Begin Styles-->
+>>>>>>> 1784ac3be8f48479d7eb486a7f95a519306949dc
 <style>
   .header-container {
     padding-top: 10px;
@@ -288,7 +303,7 @@
     flex-direction: column;
   }
   .production-details {
-    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
   .poster-flex {
     flex-basis: 20%;
@@ -333,5 +348,16 @@
   .card-container {
     border-radius: 1rem;
     background-color: lightgray;
+  }
+  .overview {
+    padding-bottom: 0.5rem;
+  }
+  .synopsis {
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+  }
+  .synopsis-heading {
+    font-weight: 600;
+    padding-bottom: 3px;
   }
 </style>

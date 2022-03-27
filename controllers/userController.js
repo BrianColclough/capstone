@@ -1,3 +1,5 @@
+const express = require("express");
+const router = express.Router();
 const model = require("../models/user");
 const rsvpModel = require("../models/rsvp");
 const Connection = require("../models/connection");
@@ -62,6 +64,7 @@ exports.login = (req, res, next) => {
 };
 
 exports.profile = (req, res, next) => {
+  console.log(req.session.user);
   let id = req.session.user;
   Promise.all([
     model.findById(id),
