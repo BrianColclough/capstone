@@ -9,15 +9,7 @@
     <div class="card-container">
       <!-- Meta Container -->
       <h1 class="title"><%= Movie.original_title %></h1>
-      <% if (user.likedMovies.includes(Movie.id)) {%>
-      <a href="/movie/unliked/ <%=Movie.id %>">
-        <img src="/images/liked.png" />
-      </a>
-      <% } else{ %>
-      <a href="/movie/liked/<%= Movie.id %>"
-        ><img src="/images/unliked.png"
-      /></a>
-      <% } %>
+     
       <!-- Details and Trailer Container-->
       <div class="details-trailer-container">
         <!-- Meta Container -->
@@ -37,6 +29,15 @@
             <p>English</p>
             <% } %> Runtime: <%= Movie.runtime %> mins | Release Date: <%=
             Movie.release_date %>
+
+            <% if (user.likedMovies.includes(Movie.id)) {%>
+              <a href="/movie/unliked/ <%=Movie.id %>">
+                <img src="/images/heart-filled.png" class="heartImage"/>
+              </a>
+              <% } else{ %>
+              <a href="/movie/liked/<%= Movie.id %>">
+                <img src="/images/heart-unfilled.png"  class="heartImage" /></a>
+              <% } %>
           </span>
           <div class="synopsis">
             <div class="synopsis-heading">SYNOPSIS</div>
@@ -65,7 +66,8 @@
             <div class="overview">
               <b> Vote Average: </b>
               <span class="meta-data"><%= Movie.vote_average %> / 10</span>
-            </div>     
+            </div>   
+            
           </div>
         </div>
       </div>
@@ -251,14 +253,9 @@
   </div>
 </div>
 <!-- End Flex Container-->
-<<<<<<< HEAD
-<%- include('../partials/footer.ejs')%> 
-<!-- Style-->
-=======
 <%- include('../partials/footer.ejs')%>
 
 <!--Begin Styles-->
->>>>>>> 1784ac3be8f48479d7eb486a7f95a519306949dc
 <style>
   .header-container {
     padding-top: 10px;
