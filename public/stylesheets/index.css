@@ -3,6 +3,13 @@ body {
   margin: 0px;
 }
 
+.heartImage{
+  width: 8%;
+  padding-left: 2%;
+}
+
+
+
 .tabs {
   overflow: hidden;
   background-color: #333;
