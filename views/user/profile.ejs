@@ -54,7 +54,7 @@
                 <td><button formmethod="post" formaction = "/connections/<%=rsvp.connection._id%>/rsvp?_method=DELETE" class = 'button2'> Delete</button></td>  
            </form>
           
-           
+         
 </tr> 
 <%});
 %>
@@ -62,6 +62,8 @@
 </table>
    <% } else {%>
         <p>You have not created any RSVPs</p>
+        <td> <%=user.likedMovies%></td> 
+        
     <%}%>
 
 

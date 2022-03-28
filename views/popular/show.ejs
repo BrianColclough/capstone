@@ -1,5 +1,7 @@
 <%- include('../partials/header.ejs')%>
 
+
+
 <!--Overall Flex Container-->
 <div class="page-container">
   <div class="flex-container">
@@ -7,15 +9,7 @@
     <div class="card-container">
       <!-- Meta Container -->
       <h1 class="title"><%= Movie.original_title %></h1>
-      <% if (user.likedMovies.includes(Movie.id)) {%>
-      <a href="/movie/unliked/ <%=Movie.id %>">
-        <img src="/images/liked.png" />
-      </a>
-      <% } else{ %>
-      <a href="/movie/liked/<%= Movie.id %>"
-        ><img src="/images/unliked.png"
-      /></a>
-      <% } %>
+     
       <!-- Details and Trailer Container-->
       <div class="details-trailer-container">
         <!-- Meta Container -->
@@ -35,6 +29,21 @@
             <p>English</p>
             <% } %> Runtime: <%= Movie.runtime %> mins | Release Date: <%=
             Movie.release_date %>
+
+
+            <% if (user) {%>
+              <% if (user.likedMovies.includes(Movie.id)) {%>
+              <a href="/movie/unliked/ <%=Movie.id %>">
+                <img src="/images/heart-filled.png" class="heartImage"/>
+              </a>
+              <% } else { %>
+              <a href="/movie/liked/<%= Movie.id %>">
+                <img src="/images/heart-unfilled.png"  class="heartImage" /></a>
+              </a>
+              <% } %>
+            <% } %>
+
+           
           </span>
           <div class="synopsis">
             <div class="synopsis-heading">SYNOPSIS</div>
@@ -54,7 +63,7 @@
               <span class="meta-data"><%= obj.name %></span>
               <% } else { %>
               <span class="meta-data">NA</span>
-              <% } %>
+              <% } %>        
             </div>
             <div class="overview">
               <b> Box Office:</b>
@@ -63,7 +72,8 @@
             <div class="overview">
               <b> Vote Average: </b>
               <span class="meta-data"><%= Movie.vote_average %> / 10</span>
-            </div>
+            </div>   
+            
           </div>
         </div>
       </div>
@@ -264,7 +274,6 @@
     width: 80rem;
     object-fit: cover;
   }
-
   .page-container {
     width: 100vw;
     display: flex;
