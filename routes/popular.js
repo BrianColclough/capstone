@@ -33,11 +33,9 @@ router.get("/", async (req, res) => {
 
 // SHOW- Show info about one movie
 router.get("/:id", async (req, res) => {
-  if (sessionUser != req.session.user && sessionUser) {
-    req.session.user = sessionUser;
-  }
-  //   console.log("session on movie page");
-  //   console.log(req.session.user);
+  model.findOne({ _id: req.session.user }).then((user) => {
+    req.session.user = user;
+  });
   try {
     const ID = req.params.id;
     const movieInfobyTitle = `${urls.movieInfobyTitle + apiKey}&query=${ID}`;
@@ -112,8 +110,14 @@ router.get("/liked/:id", (req, res) => {
       { upsert: true }
     )
     .then((user) => {
-      sessionUser = user;
+      console.log("session after like");
+      console.log(sessionUser);
     });
+  //   model.findOne({ _id: req.session.user }).then((user) => {
+  //     console.log("user from findOne)");
+  //     console.log(user);
+  //     sessionUser = user;
+  //   });
   res.redirect("/movie/" + ID);
 });
 
@@ -126,6 +130,11 @@ router.get("/unliked/:id", (req, res) => {
     .then((user) => {
       sessionUser = user;
     });
+  //   model.findOne({ _id: req.session.user }).then((user) => {
+  //     console.log("user from findOne");
+  //     console.log(user);
+  //     sessionUser = user;
+  //   });
   res.redirect("/movie/" + ID);
 });
 
