@@ -15,8 +15,6 @@ const urls = {
   movieInfobyTitle: "https://api.themoviedb.org/3/search/movie?api_key=",
   youtubeVideo: "https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=",
 };
-//session
-var sessionUser = null;
 
 // Index Route
 router.get("/", async (req, res) => {
@@ -31,11 +29,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// SHOW- Show info about one movie
+// SHOW - Show info about one movie
 router.get("/:id", async (req, res) => {
   model.findOne({ _id: req.session.user }).then((user) => {
     req.session.user = user;
   });
+  console.log(req.session.user);
   try {
     const ID = req.params.id;
     const movieInfobyTitle = `${urls.movieInfobyTitle + apiKey}&query=${ID}`;
@@ -100,6 +99,8 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/liked/:id", (req, res) => {
+  console.log("from liking movie");
+  console.log(req.session.user);
   const ID = req.params.id;
   //   console.log("session User");
   //   console.log(req.session.user);
@@ -109,16 +110,12 @@ router.get("/liked/:id", (req, res) => {
       { $push: { likedMovies: ID } },
       { upsert: true }
     )
+    // do not remove this then statement, it breaks everything lol
     .then((user) => {
-      console.log("session after like");
-      console.log(sessionUser);
+      //   console.log("session after like");
+      //   console.log(user);
+      res.redirect("/movie/" + ID);
     });
-  //   model.findOne({ _id: req.session.user }).then((user) => {
-  //     console.log("user from findOne)");
-  //     console.log(user);
-  //     sessionUser = user;
-  //   });
-  res.redirect("/movie/" + ID);
 });
 
 router.get("/unliked/:id", (req, res) => {
@@ -129,13 +126,8 @@ router.get("/unliked/:id", (req, res) => {
     .findOneAndUpdate({ _id: req.session.user }, { $pull: { likedMovies: ID } })
     .then((user) => {
       sessionUser = user;
+      res.redirect("/movie/" + ID);
     });
-  //   model.findOne({ _id: req.session.user }).then((user) => {
-  //     console.log("user from findOne");
-  //     console.log(user);
-  //     sessionUser = user;
-  //   });
-  res.redirect("/movie/" + ID);
 });
 
 module.exports = router;

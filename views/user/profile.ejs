@@ -1,73 +1,15 @@
-
 <%- include('../partials/header.ejs')%>
-<div class = "informationProfile">
-    <h2>Welcome, <%=user.firstName%></h2>
-    <%if(connections.length) {%>
-        <p>You have created the following connections</p>
-        <table class = "thead">
-            <thead class="thead">
-                <tr>
-                <th> Connection Name</th>
-                <th> Update</th>
-                <th> Delete</th>
-            </tr>
-           
-        </thead>
-    <tbody>
-        <%connections.forEach(connection => {%>
-          <tr>
-             
-           <td> <a href = '/connections/<%= connection.id%>' > <%=connection.connectionName%></a></td> 
-           <td><a href = '/connections/<%= connection.id%>/edit' class = 'button2'> Update</a></td> 
-           <td><a href = '/connections/<%= connection.id%>?_method=DELETE' class = 'button2'> Delete</a></td> 
-           <!-- <td>  <button type= "submit" formmethod = "GET" formaction = "/connections/<%= connection.id%>/edit">Update</button></td>
-           <td> <button type= "submit" formmethod = "POST" formaction = "/connections/<%= connection.id%>?_method=DELETE">Delete</button></td>  -->
-</tr> 
-<%});
-%>
-</tbody>
-</table>
-   <% } else {%>
-        <p>You have not created any connections</p>
-    <%}%>
-
-    <%if(rsvps.length) {%>
-        <p>You have RSVP'd for the following connections</p>
-        <table class = "thead">
-            <thead class="thead">
-                <tr>
-                <th> Connection Name</th>
-                <th> RSVP Status</th>
-                <th> Update</th>
-                <th> Delete</th>
-            </tr>
-           
-        </thead>
-    <tbody>
-        <%rsvps.forEach(rsvp => {%>
-          <tr>
-             
-           <td> <%=rsvp.connection.connectionName%></td> 
-           <td> <%=rsvp.rsvp%></td> 
-           <form>
-                <td><button formmethod="get" formaction = "/connections/<%=rsvp.connection._id%>/" class = 'button2'> Update</button></td> 
-                <td><button formmethod="post" formaction = "/connections/<%=rsvp.connection._id%>/rsvp?_method=DELETE" class = 'button2'> Delete</button></td>  
-           </form>
-          
-         
-</tr> 
-<%});
-%>
-</tbody>
-</table>
-   <% } else {%>
-        <p>You have not created any RSVPs</p>
-        <td> <%=user.likedMovies%></td> 
-        
-    <%}%>
-
-
-
-
-    </div>
-    <%- include('../partials/footer.ejs')%>
+<div class="informationProfile">
+  <h2>Welcome, <%=user.firstName%></h2>
+  <%if(movieTitles.length) {%>
+  <p>You have liked the following Movies</p>
+  <%for(let i = 0; i < movieTitles.length; i++){%>
+  <div>
+    <%=movieTitles[i]%>
+    <img class="cast-poster" src="<%= moviePosters[i]%>" />
+  </div>
+  <%}; %> <% } else {%>
+  <p>You have not liked any movies</p>
+  <%}%>
+</div>
+<%- include('../partials/footer.ejs')%>

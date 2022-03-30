@@ -3,6 +3,12 @@ const router = express.Router();
 const model = require("../models/user");
 const rsvpModel = require("../models/rsvp");
 const Connection = require("../models/connection");
+const fetch = require("node-fetch");
+const urls = {
+  movieInfobyTitle: "https://api.themoviedb.org/3/search/movie?api_key=",
+  singleMovieInfo: "https://api.themoviedb.org/3/movie/",
+};
+const apiKey = "b85b3c13a595dcf1d03f1878600fb10e";
 
 exports.new = (req, res) => {
   return res.render("./user/new");
@@ -63,21 +69,43 @@ exports.login = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-exports.profile = (req, res, next) => {
-  console.log(req.session.user);
-  let id = req.session.user;
-  Promise.all([
-    model.findById(id),
-    Connection.find({ author: id }),
-    rsvpModel.find({ user: id }).populate("connection"),
-  ]) //and rsvp
-    //Promise.all([model.findById(id), Connection.find({hostName: id}), rsvpModel.find({user: id}).populate('connection')]) //and rsvp
-    .then((results) => {
-      const [user, connections, rsvps] = results;
+exports.profile = async (req, res, next) => {
+  // update user's profile to ensure we have all the movies they have liked
+  model.findOne({ _id: req.session.user }).then((user) => {
+    req.session.user = user;
+  });
 
-      res.render("./user/profile", { user, connections, rsvps });
-    })
-    .catch((err) => next(err));
+  // get all the movies the user has liked and put into arrays that we will pass to the view
+  try {
+    movieTitles = [];
+    moviePosters = [];
+    for (let i = 0; i < req.session.user.likedMovies.length; i++) {
+      const singleMovieInfo = `${
+        urls.singleMovieInfo + req.session.user.likedMovies[i]
+      }?api_key=${apiKey}`;
+      try {
+        const singleMovieRequest = await fetch(singleMovieInfo);
+        var info = await singleMovieRequest.json();
+        // console.log(info);
+        if (!movieTitles.includes(info.original_title)) {
+          movieTitles.push(info.original_title);
+          moviePosters.push(
+            "https://image.tmdb.org/t/p/w500" + info.poster_path
+          );
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  } catch (err) {
+    throw err;
+  }
+  console.log(movieTitles);
+  res.render("./user/profile", {
+    user: req.session.user,
+    movieTitles: movieTitles,
+    moviePosters: moviePosters,
+  });
 };
 
 exports.logout = (req, res, next) => {
