@@ -2,14 +2,51 @@
 <div class="informationProfile">
   <h2>Welcome, <%=user.firstName%></h2>
   <%if(movieTitles.length) {%>
-  <p>You have liked the following Movies</p>
-  <%for(let i = 0; i < movieTitles.length; i++){%>
-  <div>
-    <%=movieTitles[i]%>
-    <img class="cast-poster" src="<%= moviePosters[i]%>" />
+  <div class="likes">
+    <div class="likes-container">
+      <p>Your Likes</p>
+      <%for(let i = 0; i < movieTitles.length; i++){%>
+      <div class="liked-movies">
+        <div><img class="poster" src="<%= moviePosters[i]%>" /></div>
+        <%=movieTitles[i]%> <%}; %>
+      </div>
+      <% } else {%>
+      <p>You have not liked any movies</p>
+      <%}%>
+    </div>
   </div>
-  <%}; %> <% } else {%>
-  <p>You have not liked any movies</p>
-  <%}%>
+</div>
+</div>
+</div>
 </div>
 <%- include('../partials/footer.ejs')%>
+
+<style>
+  .informationProfile {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    padding: 20px;
+  }
+  .likes {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .likes-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .liked-movies {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    row-gap: 10px;
+  }
+  .poster {
+    width: 200px;
+    height: 300px;
+  }
+</style>
