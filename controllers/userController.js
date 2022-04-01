@@ -84,9 +84,12 @@ exports.profile = async (req, res, next) => {
         urls.singleMovieInfo + req.session.user.likedMovies[i]
       }?api_key=${apiKey}`;
       try {
+        // get the movie info and put it into json format
         const singleMovieRequest = await fetch(singleMovieInfo);
         var info = await singleMovieRequest.json();
-        // console.log(info);
+        console.log(info);
+
+        // if movie is not already in the list then add it
         if (!movieTitles.includes(info.original_title)) {
           movieTitles.push(info.original_title);
           moviePosters.push(
@@ -100,7 +103,7 @@ exports.profile = async (req, res, next) => {
   } catch (err) {
     throw err;
   }
-  console.log(movieTitles);
+  //   console.log(movieTitles);
   res.render("./user/profile", {
     user: req.session.user,
     movieTitles: movieTitles,
