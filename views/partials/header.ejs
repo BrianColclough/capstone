@@ -1,76 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" , initial-scale=1>  
-    <link rel="stylesheet" href="/stylesheets/index.css"> 
-    
-    <title> Flix.Net</title>
-</head>
-<body>
-<!-- Tabs  -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
 
-<div class="flex-wrapper" >
-    <div class="image">
-    <a href="/" >
-    <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo">
-    </a>
-   </div>
-     <div class="nav">
+    <title>Flix.Net</title>
+  </head>
+  <body>
+    <!-- Tabs  -->
+
+    <div class="flex-wrapper">
+      <div class="image">
+        <a href="/">
+          <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo" />
+        </a>
+      </div>
+      <div class="nav">
         <div class="nav-child">
-            <a href="/"> Home </a>
-          </div>
+          <a href="/"> Home </a>
+        </div>
 
-  
-    <%if(!user) {%>
-        <div class="nav-child"> 
-        <a href='/users/new' > Sign Up</a>
+        <%if(!user) {%>
+        <div class="nav-child">
+          <a href="/users/new"> Sign Up</a>
         </div>
-        <div class="nav-child"> 
-        <a href='/users/login' >Login</a>
+        <div class="nav-child">
+          <a href="/users/login">Login</a>
         </div>
-    <%} else {%>
-        <div class="nav-child"> 
-        <a href='/users/profile' >Profile</a>
+        <%} else {%>
+        <div class="nav-child">
+          <a href="/users/profile">Profile</a>
         </div>
-        <div class="nav-child"> 
-            <a href='/users/logout'>Logout</a>
-            </div>
-        <br>
+        <div class="nav-child">
+          <a href="/users/logout">Logout</a>
+        </div>
+        <br />
         <div class="SearchBar">
-        <div class="nav-child">  
-        <form action="/search?source=hp" method="post">
-            <input type="search"
-            name="movieSearch"
-            id="movieSearch" placeholder="Search..">
-            <input type="submit" value="Submit">
-        </form>
+          <form action="/search?source=hp" method="post">
+            <input
+              type="search"
+              name="movieSearch"
+              id="movieSearch"
+              placeholder="Search.."
+            />
+            <div class="checkboxes">
+              <div class="check-item">
+                <input type="checkbox" name="netflix" />
+                <label for="netflix">Netflix</label>
+              </div>
+            </div>
+            <input type="submit" value="Submit" />
+          </form>
         </div>
+
+        <%}%>
+      </div>
     </div>
-      
-    </br>
-    </br>
-</br>
-</br>
-    <%}%>
 
-    
-</div>
-</div>
+    <% if(errorMessages.length > 0) {%> <% errorMessages.forEach(message=>{%>
+    <div class="error"><%=message%></div>
+    <%});%> <%}%> <% if(successMessages.length > 0) {%> <%
+    successMessages.forEach(message=>{%>
+    <div class="success"><%=message%></div>
+    <%});%> <%}%>
+  </body>
+</html>
 
-<% if(errorMessages.length > 0) {%>
-    <% errorMessages.forEach(message=>{%>
-        <div class='error'>
-            <%=message%>
-        </div>
-        <%});%>
-            <%}%>
-
-                <% if(successMessages.length > 0) {%>
-
-                    <% successMessages.forEach(message=>{%>
-                        <div class='success'>
-                            <%=message%>
-                        </div>
-                        <%});%>
-                            <%}%>
+<style>
+  .checkboxes {
+    display: flex;
+    flex-direction: row;
+  }
+  .check-item {
+    font-size: 1rem;
+  }
+</style>

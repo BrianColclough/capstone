@@ -1,73 +1,58 @@
-
 <%- include('../partials/header.ejs')%>
-<div class = "informationProfile">
-    <h2>Welcome, <%=user.firstName%></h2>
-    <%if(connections.length) {%>
-        <p>You have created the following connections</p>
-        <table class = "thead">
-            <thead class="thead">
-                <tr>
-                <th> Connection Name</th>
-                <th> Update</th>
-                <th> Delete</th>
-            </tr>
-           
-        </thead>
-    <tbody>
-        <%connections.forEach(connection => {%>
-          <tr>
-             
-           <td> <a href = '/connections/<%= connection.id%>' > <%=connection.connectionName%></a></td> 
-           <td><a href = '/connections/<%= connection.id%>/edit' class = 'button2'> Update</a></td> 
-           <td><a href = '/connections/<%= connection.id%>?_method=DELETE' class = 'button2'> Delete</a></td> 
-           <!-- <td>  <button type= "submit" formmethod = "GET" formaction = "/connections/<%= connection.id%>/edit">Update</button></td>
-           <td> <button type= "submit" formmethod = "POST" formaction = "/connections/<%= connection.id%>?_method=DELETE">Delete</button></td>  -->
-</tr> 
-<%});
-%>
-</tbody>
-</table>
-   <% } else {%>
-        <p>You have not created any connections</p>
-    <%}%>
-
-    <%if(rsvps.length) {%>
-        <p>You have RSVP'd for the following connections</p>
-        <table class = "thead">
-            <thead class="thead">
-                <tr>
-                <th> Connection Name</th>
-                <th> RSVP Status</th>
-                <th> Update</th>
-                <th> Delete</th>
-            </tr>
-           
-        </thead>
-    <tbody>
-        <%rsvps.forEach(rsvp => {%>
-          <tr>
-             
-           <td> <%=rsvp.connection.connectionName%></td> 
-           <td> <%=rsvp.rsvp%></td> 
-           <form>
-                <td><button formmethod="get" formaction = "/connections/<%=rsvp.connection._id%>/" class = 'button2'> Update</button></td> 
-                <td><button formmethod="post" formaction = "/connections/<%=rsvp.connection._id%>/rsvp?_method=DELETE" class = 'button2'> Delete</button></td>  
-           </form>
-          
-         
-</tr> 
-<%});
-%>
-</tbody>
-</table>
-   <% } else {%>
-        <p>You have not created any RSVPs</p>
-        <td> <%=user.likedMovies%></td> 
-        
-    <%}%>
-
-
-
-
+<div class="informationProfile">
+  <h2>Welcome, <%=user.firstName%></h2>
+  <%if(movieTitles.length) {%>
+  <div class="likes">
+    <div class="likes-container">
+      <div class ="textLike">You've Liked these <%=user.likedMovies.length%> Movies </div><br>
+      <%for(let i = 0; i < movieTitles.length; i++){%>
+      <div class="liked-movies">
+        <div><img class="poster" src="<%= moviePosters[i]%>" /></div>
+        <div class="textTitlesLiked"> <%=movieTitles[i]%> <%}; %></div><br>
+      </div>
+      <% } else {%>
+      <p>You have not liked any movies</p>
+      <%}%>
     </div>
-    <%- include('../partials/footer.ejs')%>
+  </div>
+</div>
+<!-- Close open divs from header so footer is formatted correctly -->
+</div>
+</div>
+</div>
+<%- include('../partials/footer.ejs')%>
+
+<style>
+    .textLike{
+  font-size: 130%;
+    font-weight: bold;
+   
+  }
+  .informationProfile {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    padding: 20px;
+  }
+  .likes {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .likes-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .liked-movies {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    row-gap: 10px;
+  }
+  .poster {
+    width: 200px;
+    height: 300px;
+  }
+</style>
