@@ -4,6 +4,7 @@ const model = require("../models/user");
 const rsvpModel = require("../models/rsvp");
 const Connection = require("../models/connection");
 const fetch = require("node-fetch");
+const comment = require('../models/comment');
 const urls = {
   movieInfobyTitle: "https://api.themoviedb.org/3/search/movie?api_key=",
   singleMovieInfo: "https://api.themoviedb.org/3/movie/",
@@ -13,6 +14,14 @@ const apiKey = "b85b3c13a595dcf1d03f1878600fb10e";
 exports.new = (req, res) => {
   return res.render("./user/new");
 };
+
+exports.add = (req, res)=>{
+  res.render('./movie/id');
+};
+
+
+
+
 
 exports.create = (req, res, next) => {
   let user = new model(req.body);

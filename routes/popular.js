@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const model = require("../models/user");
+const comment = require("../models/comment");
 const fetch = require("node-fetch");
 const session = require("express-session");
 const user = require("../models/user");
@@ -15,6 +16,17 @@ const urls = {
   movieInfobyTitle: "https://api.themoviedb.org/3/search/movie?api_key=",
   youtubeVideo: "https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=",
 };
+
+
+
+
+
+
+
+
+
+
+
 
 // Index Route
 router.get("/", async (req, res) => {
@@ -117,6 +129,34 @@ router.get("/liked/:id", (req, res) => {
       res.redirect("/movie/" + ID);
     });
 });
+
+
+//Adding users Comment
+router.get("./movie/:id/comment", (req, res) => {
+  const ID = req.params.id;
+  //   console.log("session User");
+  //   console.log(req.session.user);
+  comment
+    .findOneAndUpdate(
+      { _id: req.session.user },
+      { Movie: ID },
+      { Comment: req.session.body } ,
+      { upsert: true }
+    )
+    // do not remove this then statement, it breaks everything lol
+    .then((user) => {
+      //   console.log("session after like");
+      //   console.log(user);
+      res.redirect("/movie/" + ID);
+    });
+});
+
+
+
+
+
+
+
 
 router.get("/unliked/:id", (req, res) => {
   const ID = req.params.id;

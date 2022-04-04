@@ -138,6 +138,22 @@
       <!-- End Cast Description-->
     </div>
     <!-- End Poster and Cast Container-->
+    <% if (user) {%>
+      <form action="/movie/:id/comment" class="formss" method="GET">
+        <div class="form-childrens">
+        <label for="comments"><b>Leave a Comment</b>
+        </label>
+        <br />
+        <input type="text" placeholder="Enter Comments here" name="comment" />
+      </div>
+      <div class="clearfix">
+        <button type="submit" class="signupbtn">Submit</button>
+      </div>
+      </form>
+    <% } %>
+
+Comments
+
 
     <!-- Recommendations -->
     <div>
