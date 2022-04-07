@@ -168,6 +168,8 @@ async function filters(body) {
   let hulu = body["hulu"];
   let fubo = body["fubo"];
   let amazon = body["amazon"];
+  let hbo = body["hbo"];
+  let disney = body["disney"];
 
   if (netflix === "on") {
     console.log("netflix on");
@@ -184,6 +186,14 @@ async function filters(body) {
   if (amazon === "on") {
     console.log("amazon on");
     res.push("Amazon Prime Video");
+  }
+  if (disney === "on") {
+    console.log("Disney plus on");
+    res.push("Disney Plus");
+  }
+  if (hbo === "on") {
+    console.log("hbo max on");
+    res.push("HBO Max");
   }
   return res;
 }
