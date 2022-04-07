@@ -47,6 +47,8 @@ router.get("/:id", async (req, res) => {
     req.session.user = user;
   });
   console.log(req.session.user);
+
+
   try {
     const ID = req.params.id;
     const movieInfobyTitle = `${urls.movieInfobyTitle + apiKey}&query=${ID}`;
@@ -96,6 +98,8 @@ router.get("/:id", async (req, res) => {
     } catch (e) {
       throw e;
     }
+
+
     res.render("popular/show", {
       Movie: info,
       Video: video,

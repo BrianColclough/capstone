@@ -9,14 +9,15 @@
   <% parsedData.results.forEach((movie)=>{ %>
   <div class="movie">
     <div class="movie-contents-container">
-      <a href="/movie/<%= movie.id %>"
-        ><img
+      <a href="/movie/<%= movie.id %>">
+        <img
           src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
           alt="Movie logo"
         />
         <h4 class="movie-name"><%= movie.original_title %></h4>
       </a>
     </div>
+    
   </div>
   <% })%>
 </div>
