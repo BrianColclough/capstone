@@ -3,12 +3,14 @@ body {
   margin: 0px;
 }
 
+
+
+
 .heartImage{
   width: 8%;
   padding-left: 2%;
 }
 
-/* HEllo */
 
 .tabs {
   overflow: hidden;
@@ -160,6 +162,18 @@ button:hover {
   float: left;
   width: 40%;
 }
+
+.submitComment{
+    width: 12%;
+    border: 0;
+    padding: 10px 0;
+    margin: 5px 14%;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+
 
 h1 {
   text-align: center;
