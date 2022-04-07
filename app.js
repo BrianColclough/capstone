@@ -91,16 +91,16 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/search", async (req, res, next) => {
+app.post("/search", (req, res, next) => {
   // res.send("Sanity Check")
   //empty array to hold movie search results if search is specified
   var searchResults = [];
   const userSearchTerm = encodeURI(req.body.movieSearch);
   const movieUrl = `https://api.themoviedb.org/3/search/movie?query=${userSearchTerm}&api_key=1f809315a3a8c0a1456dd83615b4d783`;
-  let netflixCheck = req.body["netflix"];
-  await request.get(movieUrl, (error, response, movieData) => {
+  let netflixCheck = req.body["Netflix"];
+  console.log(netflixCheck);
+  request.get(movieUrl, (error, response, movieData) => {
     const parsedData = JSON.parse(movieData);
-    // res.json(parsedData);
 
     if (netflixCheck === "on") {
       var count = Object.keys(parsedData.results).length;
@@ -110,8 +110,6 @@ app.post("/search", async (req, res, next) => {
           parsedData.results[i].id +
           "/watch/providers?api_key=" +
           apiKey;
-        console.log("outside request");
-        // console.log(parsedData.results[i]);
         request.get(providerURL, (error, response, providerData) => {
           var parstedProviderData = JSON.parse(providerData);
           if (parstedProviderData.results.US) {
@@ -125,10 +123,8 @@ app.post("/search", async (req, res, next) => {
                 parstedProviderData.results.US.flatrate[0].provider_name ===
                 "Netflix"
               ) {
-                var index = i;
+                console.log(i);
                 console.log("netflix Found: this will be added:");
-                console.log("inside request");
-                console.log(parsedData.results[index]);
                 //   console.log(parsedData.results);
                 //   console.log(parsedData.results[i]);
                 var results = parsedData.results[i];

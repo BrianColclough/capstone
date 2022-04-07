@@ -17,17 +17,6 @@ const urls = {
   youtubeVideo: "https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=",
 };
 
-
-
-
-
-
-
-
-
-
-
-
 // Index Route
 router.get("/", async (req, res) => {
   try {
@@ -39,6 +28,27 @@ router.get("/", async (req, res) => {
   } catch (e) {
     throw e;
   }
+});
+
+//Adding users Comment
+router.post("/:id/comment", (req, res) => {
+  const ID = req.params.id;
+  console.log("comment");
+  console.log(req.session.user.userName.toString());
+  comment
+    .findOneAndUpdate(
+      { movie: req.params.id },
+      {
+        $push: { user: req.session.user.userName, comment: req.body.comment },
+      },
+      { upsert: true }
+    )
+    // do not remove this then statement, it breaks everything lol
+    .then((user) => {
+      //   console.log("session after like");
+      //   console.log(user);
+      res.redirect("/movie/" + ID);
+    });
 });
 
 // SHOW - Show info about one movie
@@ -96,15 +106,33 @@ router.get("/:id", async (req, res) => {
     } catch (e) {
       throw e;
     }
-    res.render("popular/show", {
-      Movie: info,
-      Video: video,
-      Credit: credit,
-      Recommend: recommend,
-      currPopular,
-      layout: false,
-      user: req.session.user,
+    var movieComments;
+    await comment.findOne({ movie: req.params.id }).then((comment) => {
+      movieComments = comment;
     });
+    if (movieComments) {
+      res.render("popular/show", {
+        Movie: info,
+        Video: video,
+        Credit: credit,
+        Recommend: recommend,
+        currPopular,
+        layout: false,
+        user: req.session.user,
+        comment: movieComments,
+      });
+    } else {
+      res.render("popular/show", {
+        Movie: info,
+        Video: video,
+        Credit: credit,
+        Recommend: recommend,
+        currPopular,
+        layout: false,
+        user: req.session.user,
+        comment: null,
+      });
+    }
   } catch (e) {
     throw e;
   }
@@ -129,34 +157,6 @@ router.get("/liked/:id", (req, res) => {
       res.redirect("/movie/" + ID);
     });
 });
-
-
-//Adding users Comment
-router.get("./movie/:id/comment", (req, res) => {
-  const ID = req.params.id;
-  //   console.log("session User");
-  //   console.log(req.session.user);
-  comment
-    .findOneAndUpdate(
-      { _id: req.session.user },
-      { Movie: ID },
-      { Comment: req.session.body } ,
-      { upsert: true }
-    )
-    // do not remove this then statement, it breaks everything lol
-    .then((user) => {
-      //   console.log("session after like");
-      //   console.log(user);
-      res.redirect("/movie/" + ID);
-    });
-});
-
-
-
-
-
-
-
 
 router.get("/unliked/:id", (req, res) => {
   const ID = req.params.id;
