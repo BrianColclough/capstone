@@ -51,7 +51,9 @@ app.use(
     secret: "ajfeirf90aeu9eroejfoefj",
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongoUrl: "mongodb://localhost:27017/capstone" }),
+    store: new MongoStore({
+      mongoUrl: "mongodb://localhost:27017/capstone",
+    }),
     cookie: { maxAge: 60 * 60 * 1000 },
   })
 );
@@ -91,12 +93,60 @@ app.get("/", async (req, res) => {
 
 app.post("/search", (req, res, next) => {
   // res.send("Sanity Check")
+  //empty array to hold movie search results if search is specified
+  var searchResults = [];
   const userSearchTerm = encodeURI(req.body.movieSearch);
   const movieUrl = `https://api.themoviedb.org/3/search/movie?query=${userSearchTerm}&api_key=1f809315a3a8c0a1456dd83615b4d783`;
-  // res.send(movieUrl)
+  let netflixCheck = req.body["Netflix"];
+  console.log(netflixCheck);
   request.get(movieUrl, (error, response, movieData) => {
     const parsedData = JSON.parse(movieData);
-    // res.json(parsedData);
+
+    if (netflixCheck === "on") {
+      var count = Object.keys(parsedData.results).length;
+      for (var i = 0; i < count; i++) {
+        let providerURL =
+          "https://api.themoviedb.org/3/movie/" +
+          parsedData.results[i].id +
+          "/watch/providers?api_key=" +
+          apiKey;
+        request.get(providerURL, (error, response, providerData) => {
+          var parstedProviderData = JSON.parse(providerData);
+          if (parstedProviderData.results.US) {
+            if (parstedProviderData.results.US.flatrate !== undefined) {
+              //   for (
+              //     var j = 0;
+              //     j < parstedProviderData.results.US.flatrate.length;
+              //     j++
+              //   ) {
+              if (
+                parstedProviderData.results.US.flatrate[0].provider_name ===
+                "Netflix"
+              ) {
+                console.log(i);
+                console.log("netflix Found: this will be added:");
+                //   console.log(parsedData.results);
+                //   console.log(parsedData.results[i]);
+                var results = parsedData.results[i];
+                searchResults.push(results);
+              }
+              // console.log(
+              //   parstedProviderData.results.US.flatrate[j].provider_name
+              // );
+              //   }
+            }
+          }
+        });
+      }
+    }
+    console.log(searchResults);
+    if (searchResults) {
+      res.render("index", {
+        parsedData: searchResults,
+        user: req.session.user,
+        title: `Search Results for ${userSearchTerm} -`,
+      });
+    }
     res.render("index", {
       parsedData: parsedData,
       user: req.session.user,

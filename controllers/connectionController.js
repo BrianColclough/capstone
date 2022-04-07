@@ -1,9 +1,9 @@
 
-const model = require('../models/connection');
-const rsvpModel = require('../models/rsvp');
+
 // const model = require('../models/rsvp');
 const {isAuthor} = require('../middleware/auth');
-const connection = require('../models/connection');
+
+const comment = require('../models/comment');
 
 
 exports.index = (req, res, next)=>{

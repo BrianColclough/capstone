@@ -1,76 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" , initial-scale=1>  
-    <link rel="stylesheet" href="/stylesheets/index.css"> 
-    
-    <title> Flix.Net</title>
-</head>
-<body>
-<!-- Tabs  -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
 
-<div class="flex-wrapper" >
-    <div class="image">
-    <a href="/" >
-    <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo">
-    </a>
-   </div>
-     <div class="nav">
+    <title>Flix.Net</title>
+  </head>
+  <body>
+    <!-- Tabs  -->
+
+    <div class="flex-wrapper">
+      <div class="image">
+        <a href="/">
+          <img src="/images/Flix-Logo.png" alt="Flix Logo" class="logo" />
+        </a>
+      </div>
+      <div class="nav">
         <div class="nav-child">
-            <a href="/"> Home </a>
-          </div>
+          <a href="/"> Home </a>
+        </div>
 
-  
-    <%if(!user) {%>
-        <div class="nav-child"> 
-        <a href='/users/new' > Sign Up</a>
+        <%if(!user) {%>
+        <div class="nav-child">
+          <a href="/users/new"> Sign Up</a>
         </div>
-        <div class="nav-child"> 
-        <a href='/users/login' >Login</a>
+        <div class="nav-child">
+          <a href="/users/login">Login</a>
         </div>
-    <%} else {%>
-        <div class="nav-child"> 
-        <a href='/users/profile' >Profile</a>
+        <%} else {%>
+        <div class="nav-child">
+          <a href="/users/profile">Profile</a>
         </div>
-        <div class="nav-child"> 
-            <a href='/users/logout'>Logout</a>
-            </div>
-        <br>
+        <div class="nav-child">
+          <a href="/users/logout">Logout</a>
+        </div>
+        <br />
         <div class="SearchBar">
-        <div class="nav-child">  
-        <form action="/search?source=hp" method="post">
-            <input type="search"
-            name="movieSearch"
-            id="movieSearch" placeholder="Search..">
-            <input type="submit" value="Submit">
-        </form>
+          <form action="/search?source=hp" method="post">
+            <input
+              type="search"
+              name="movieSearch"
+              id="movieSearch"
+              placeholder="Search.."
+            />
+
+            <dl class="dropdown">
+              <dt>
+                <a href="#">
+                  <span class="hida">Select</span>
+                  <p class="multiselct"></p>
+                </a>
+              </dt>
+
+              <dd>
+                <ul>
+                  Where
+                  <li><input type="checkbox" name="Netflix" />Netflix</li>
+                  <li>
+                    <input type="checkbox" name="Prime Video" />Prime Video
+                  </li>
+                  <li><input type="checkbox" name="Disney +" />Disney +</li>
+                  <li><input type="checkbox" name="Apple TV" />Apple TV</li>
+                  <li>
+                    <input type="checkbox" name="Google Play Movies" />Google
+                    Play Movies
+                  </li>
+                  <li><input type="checkbox" name="Hulu" />Hulu</li>
+                  <li>
+                    <input type="checkbox" name="Paramount +" />Paramount +
+                  </li>
+                  <li><input type="checkbox" name="Peacock" />Peacock</li>
+                  <li><input type="checkbox" name="Funimation" />Funimation</li>
+                  <li><input type="checkbox" name="Fubo" />Fubo</li>
+                  <li>
+                    <input type="checkbox" name="Discovery +" />Discovery +
+                  </li>
+                  <li><input type="checkbox" name="HBO Max" />HBO Max</li>
+                  <li><input type="checkbox" name="Crackle" />Crackle</li>
+                  <li>
+                    <input type="checkbox" name="Youtube Premium " />Youtube
+                    Premium
+                  </li>
+                  <li><input type="checkbox" name="AMC Plus" />AMC Plus</li>
+                  <li><input type="checkbox" name="Showtime" />Showtime</li>
+                </ul>
+              </dd>
+              <button>Submit</button>
+            </dl>
+
+            <div class="checkboxes">
+              <div class="check-item">
+                <input type="checkbox" name="netflix" />
+                <label for="netflix">Netflix</label>
+              </div>
+            </div>
+            <input type="submit" value="Submit" />
+          </form>
         </div>
+
+        <%}%>
+      </div>
     </div>
-      
-    </br>
-    </br>
-</br>
-</br>
-    <%}%>
 
-    
-</div>
-</div>
+    <% if(errorMessages.length > 0) {%> <% errorMessages.forEach(message=>{%>
+    <div class="error"><%=message%></div>
+    <%});%> <%}%> <% if(successMessages.length > 0) {%> <%
+    successMessages.forEach(message=>{%>
+    <div class="success"><%=message%></div>
+    <%});%> <%}%>
+  </body>
+</html>
 
-<% if(errorMessages.length > 0) {%>
-    <% errorMessages.forEach(message=>{%>
-        <div class='error'>
-            <%=message%>
-        </div>
-        <%});%>
-            <%}%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-                <% if(successMessages.length > 0) {%>
+<style>
+  .mutliSelect {
+    height: 100px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
-                    <% successMessages.forEach(message=>{%>
-                        <div class='success'>
-                            <%=message%>
-                        </div>
-                        <%});%>
-                            <%}%>
+  .dropdown {
+    position: absolute;
+    top: 23%;
+    transform: translateY(-30%);
+    left: 50%;
+    /* right: -10%; */
+  }
+  /* a {
+        color: #fff;
+        } */
+  .dropdown dd,
+  .dropdown dt {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .dropdown ul {
+    margin: -1px 0 0 0;
+  }
+  .dropdown dd {
+    position: relative;
+  }
+  .dropdown a,
+  .dropdown a:visited {
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+    font-size: 25px;
+  }
+  .dropdown dt a {
+    background-color: #2e5e68;
+    display: block;
+    padding: 8px 20px 5px 10px;
+    min-height: 25px;
+    line-height: 24px;
+    overflow: hidden;
+    border: 0;
+    width: 272px;
+  }
+  .dropdown dt a span,
+  .multiselct span {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 3px 2px 0;
+  }
+  .dropdown dd ul {
+    background-color: #2e5e68;
+    border: 0;
+    color: #fff;
+    display: none;
+    left: 0px;
+    padding: 2px 15px 2px 5px;
+    /* position: absolute; */
+    top: 2px;
+    width: 280px;
+    list-style: none;
+    height: 100px;
+    overflow: auto;
+  }
+  .dropdown span.value {
+    display: none;
+  }
+  .dropdown dd ul li a {
+    padding: 5px;
+    display: block;
+  }
+  .dropdown dd ul li a:hover {
+    background-color: #fff;
+  }
+  button {
+    background-color: #2ab1ce;
+    width: 302px;
+    border: 0;
+    padding: 10px 0;
+    margin: 5px 0;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  $(".dropdown dt a").on("click", function () {
+    $(".dropdown dd ul").slideToggle("fast");
+  });
+
+  $(".dropdown dd ul li a").on("click", function () {
+    $(".dropdown dd ul").hide();
+  });
+
+  function getSelectedValue(id) {
+    return $("#" + id)
+      .find("dt a span.value")
+      .html();
+  }
+
+  $(document).bind("click", function (e) {
+    var $clicked = $(e.target);
+    if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+  });
+
+  $('.mutliSelect input[type="checkbox"]').on("click", function () {
+    var title = $(this)
+        .closest(".mutliSelect")
+        .find('input[type="checkbox"]')
+        .val(),
+      title = $(this).val() + ",";
+
+    if ($(this).is(":checked")) {
+      var html = '<span title="' + title + '">' + title + "</span>";
+      $(".multiselct").append(html);
+      $(".hida").hide();
+    } else {
+      $('span[title="' + title + '"]').remove();
+      var ret = $(".hida");
+      $(".dropdown dt a").append(ret);
+    }
+  });
+</script>
+<style>
+  .checkboxes {
+    display: flex;
+    flex-direction: row;
+  }
+  .check-item {
+    font-size: 1rem;
+  }
+</style>
