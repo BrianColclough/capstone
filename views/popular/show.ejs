@@ -73,14 +73,16 @@
       <!-- additional-details -->
     </div>
     <!-- Card Container -->
-
+ <br />
+    <br />
     <!-- Poster and cast container-->
     <div class="poster-cast-container">
       <!-- Modal -->
       <div id="myModal" class="trailer-container" role="dialog">
+        
         <!-- Modal content-->
         <div class="modal-header">
-          <h4 class="modal-title">Movie Clip</h4>
+          <h3 class="modal-title">Movie Clip</h3>
         </div>
         <div class="modal-body">
           <div class="video-container">
@@ -126,36 +128,54 @@
           </div>
         </div>
       </div>
+
+  
       <!-- End Cast Description-->
     </div>
+    <br />
+    <br />
     <!-- End Poster and Cast Container-->
     <% if (user) {%>
-    <form action="/movie/<%= Movie.id %>/comment" class="forms" method="POST">
-      <div class="form-childrens">
+    <form action="/movie/<%= Movie.id %>/comment" class="commentForm" method="POST">
+      <div class="commentForm-childrens">
         <label for="comments"><b>Leave a Comment</b> </label>
-        <br />
-        <input type="text" placeholder="Enter Comments here" name="comment" />
+        <br /><br />
+        <!-- <textarea id="comment" placeholder="Enter Comments here" name="comment" > </textarea> -->
+        <textarea name="comment"  id="comment"rows="7" cols="80" placeholder="Enter Comments here" style="width: 492px; height: 150px; font-size: 20px;"></textarea>
       </div>
       <div class="clearfix">
-        <button type="submit" class="signupbtn">Submit</button>
+        <button type="submitComment" class="submitComment">Submit</button>
       </div>
     </form>
+    <br /><br />  <br /><br /> 
+
+
+
+
 
     <!-- Comment Section -->
     <% } %> <%if(comment){%>
+      <div class="comment-container">
     <h3>User Comments</h3>
-    <div class="comment-section-wrapper">
+    <br /><br /> 
       <% for(var i = 0; i < comment.comment.length; i++) { %>
       <div class="user-comment-wrapper">
         <div class="comment-user-name"><%=comment.user[i]%></div>
         <div class="comment-body"><%=comment.comment[i]%></div>
       </div>
+  <br>
       <% } %>
     </div>
     <% }%>
     <!-- End Comment Section -->
 
+
+
+
+
+
     <!-- Recommendations -->
+    <br /><br />  <br /><br /> 
     <div>
       <h2>People who liked this also liked...</h2>
       <div class="reccomendations-container">

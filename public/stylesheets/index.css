@@ -3,12 +3,65 @@ body {
   margin: 0px;
 }
 
+.commentForm{
+  font-size: 20px;
+}
+
+.commentForm-childrens{
+font-size: 20px;
+}
+
+
+
+
+.comment-container{
+    border-radius: 1rem;
+    background-color: lightgray;
+    text-align: center;
+   
+  }
+
+.comment-user-name{
+  font-size: 16px;
+ color: black;
+ padding-right: 70%;
+ font-style: italic;
+ font-weight: 90;
+
+}
+
+.comment-body{
+  font-size: 16px;
+  color: black;
+  /* font-weight:200; */
+  font-family: "Trirong", serif;
+
+  /* font-family: Poppins, sans-serif; */
+}
+
+.user-comment-wrapper{
+  font-size: 17px;
+  background-color: ghostwhite;
+  width: 295px;
+  border: 0;
+  padding: 3px 0px;
+  margin: 2px 37%;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.8em;
+  border-radius: 25px;
+
+}
+
+
+
+
+
 .heartImage{
   width: 8%;
   padding-left: 2%;
 }
 
-/* HEllo */
 
 .tabs {
   overflow: hidden;
@@ -160,6 +213,18 @@ button:hover {
   float: left;
   width: 40%;
 }
+
+.submitComment{
+    width: 12%;
+    border: 0;
+    padding: 10px 0;
+    margin: 5px 14%;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+
 
 h1 {
   text-align: center;
