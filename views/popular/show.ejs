@@ -1,7 +1,5 @@
 <%- include('../partials/header.ejs')%>
 
-
-
 <!--Overall Flex Container-->
 <div class="page-container">
   <div class="flex-container">
@@ -9,7 +7,7 @@
     <div class="card-container">
       <!-- Meta Container -->
       <h1 class="title"><%= Movie.original_title %></h1>
-     
+
       <!-- Details and Trailer Container-->
       <div class="details-trailer-container">
         <!-- Meta Container -->
@@ -28,22 +26,16 @@
             Movie.spoken_languages[0].name %> | <% } else { %>
             <p>English</p>
             <% } %> Runtime: <%= Movie.runtime %> mins | Release Date: <%=
-            Movie.release_date %>
-
-
-            <% if (user) {%>
-              <% if (user.likedMovies.includes(Movie.id)) {%>
-              <a href="/movie/unliked/ <%=Movie.id %>">
-                <img src="/images/heart-filled.png" class="heartImage"/>
-              </a>
-              <% } else { %>
-              <a href="/movie/liked/<%= Movie.id %>">
-                <img src="/images/heart-unfilled.png"  class="heartImage" /></a>
-              </a>
-              <% } %>
-            <% } %>
-
-           
+            Movie.release_date %> <% if (user) {%> <% if
+            (user.likedMovies.includes(Movie.id)) {%>
+            <a href="/movie/unliked/ <%=Movie.id %>">
+              <img src="/images/heart-filled.png" class="heartImage" />
+            </a>
+            <% } else { %>
+            <a href="/movie/liked/<%= Movie.id %>">
+              <img src="/images/heart-unfilled.png" class="heartImage"
+            /></a>
+            <% } %> <% } %>
           </span>
           <div class="synopsis">
             <div class="synopsis-heading">SYNOPSIS</div>
@@ -63,7 +55,7 @@
               <span class="meta-data"><%= obj.name %></span>
               <% } else { %>
               <span class="meta-data">NA</span>
-              <% } %>        
+              <% } %>
             </div>
             <div class="overview">
               <b> Box Office:</b>
@@ -72,8 +64,7 @@
             <div class="overview">
               <b> Vote Average: </b>
               <span class="meta-data"><%= Movie.vote_average %> / 10</span>
-            </div>   
-            
+            </div>
           </div>
         </div>
       </div>
@@ -139,21 +130,30 @@
     </div>
     <!-- End Poster and Cast Container-->
     <% if (user) {%>
-      <form action="/movie/:id/comment" class="formss" method="GET">
-        <div class="form-childrens">
-        <label for="comments"><b>Leave a Comment</b>
-        </label>
+    <form action="/movie/<%= Movie.id %>/comment" class="forms" method="POST">
+      <div class="form-childrens">
+        <label for="comments"><b>Leave a Comment</b> </label>
         <br />
         <input type="text" placeholder="Enter Comments here" name="comment" />
       </div>
       <div class="clearfix">
         <button type="submit" class="signupbtn">Submit</button>
       </div>
-      </form>
-    <% } %>
+    </form>
 
-Comments
-
+    <!-- Comment Section -->
+    <% } %> <%if(comment){%>
+    <h3>User Comments</h3>
+    <div class="comment-section-wrapper">
+      <% for(var i = 0; i < comment.comment.length; i++) { %>
+      <div class="user-comment-wrapper">
+        <div class="comment-user-name"><%=comment.user[i]%></div>
+        <div class="comment-body"><%=comment.comment[i]%></div>
+      </div>
+      <% } %>
+    </div>
+    <% }%>
+    <!-- End Comment Section -->
 
     <!-- Recommendations -->
     <div>
