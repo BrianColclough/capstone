@@ -45,56 +45,57 @@
               id="movieSearch"
               placeholder="Search.."
             />
-
-            <dl class="dropdown">
-              <dt>
-                <a href="#">
-                  <span class="hida">Select</span>
-                  <p class="multiselct"></p>
-                </a>
-              </dt>
-
-              <dd>
-                <ul>
-                  Where
-                  <li><input type="checkbox" name="Netflix" />Netflix</li>
-                  <li>
-                    <input type="checkbox" name="Prime Video" />Prime Video
-                  </li>
-                  <li><input type="checkbox" name="Disney +" />Disney +</li>
-                  <li><input type="checkbox" name="Apple TV" />Apple TV</li>
-                  <li>
-                    <input type="checkbox" name="Google Play Movies" />Google
-                    Play Movies
-                  </li>
-                  <li><input type="checkbox" name="Hulu" />Hulu</li>
-                  <li>
-                    <input type="checkbox" name="Paramount +" />Paramount +
-                  </li>
-                  <li><input type="checkbox" name="Peacock" />Peacock</li>
-                  <li><input type="checkbox" name="Funimation" />Funimation</li>
-                  <li><input type="checkbox" name="Fubo" />Fubo</li>
-                  <li>
-                    <input type="checkbox" name="Discovery +" />Discovery +
-                  </li>
-                  <li><input type="checkbox" name="HBO Max" />HBO Max</li>
-                  <li><input type="checkbox" name="Crackle" />Crackle</li>
-                  <li>
-                    <input type="checkbox" name="Youtube Premium " />Youtube
-                    Premium
-                  </li>
-                  <li><input type="checkbox" name="AMC Plus" />AMC Plus</li>
-                  <li><input type="checkbox" name="Showtime" />Showtime</li>
-                </ul>
-              </dd>
-              <button>Submit</button>
-            </dl>
-
-
             <div class="checkboxes">
-              <div class="check-item">
-                <input type="checkbox" name="netflix" />
-                <label for="netflix">Netflix</label>
+              <head>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+                
+                </head>
+              
+              
+              
+                  <div class="container">
+                    <div class="example">
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $('#option-droup-demo').multiselect();
+                            });
+                        </script>
+                        <select id="option-droup-demo" multiple="multiple">
+                            <optgroup label="Providers">
+                                <option value="Netflix">Netflix</option>
+                                <option value="Prime Video">Prime Video</option>
+                                <option value="Disney +" >Disney +</option>
+                                <option value="Hulu" >Hulu</option>
+                                <option value="Paramount +">Paramount +</option>
+                                 <option value="Funimation">Funimation</option>
+                                 <option value="HBO Max">HBO Max</option>
+                            </optgroup>
+                            <optgroup label="Movie Genres">
+                                <option value="Action">Action</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Crime">Crime</option> 
+                                <option value="Drama">Drama</option>
+                                <option value="Historic">Historic</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Python">Musical</option>
+                                <option value="Romance">Science Fiction</option>
+                            </optgroup>
+                            <optgroup label="Ratings">
+                                <option value="5 star">5 star</option>
+                                <option value="4 star">4 star</option>
+                                <option value="3 star">3 star</option>
+                                <option value="2 star">2 star</option>
+                                <option value="1 star">1 star</option>
+                            </optgroup>        
+                        </select>
+                    </div>
+                    </div>
+                    </div>
               </div>
             </div>
             <input type="submit" value="Submit" />
@@ -114,134 +115,6 @@
   </body>
 </html>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-<style>
-  .mutliSelect {
-    height: 100px;
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .dropdown {
-    position: absolute;
-    top: 23%;
-    transform: translateY(-30%);
-    left: 50%;
-    /* right: -10%; */
-  }
-  /* a {
-        color: #fff;
-        } */
-  .dropdown dd,
-  .dropdown dt {
-    margin: 0px;
-    padding: 0px;
-  }
-
-  .dropdown ul {
-    margin: -1px 0 0 0;
-  }
-  .dropdown dd {
-    position: relative;
-  }
-  .dropdown a,
-  .dropdown a:visited {
-    color: #fff;
-    text-decoration: none;
-    outline: none;
-    font-size: 25px;
-  }
-  .dropdown dt a {
-    background-color: #2e5e68;
-    display: block;
-    padding: 8px 20px 5px 10px;
-    min-height: 25px;
-    line-height: 24px;
-    overflow: hidden;
-    border: 0;
-    width: 272px;
-  }
-  .dropdown dt a span,
-  .multiselct span {
-    cursor: pointer;
-    display: inline-block;
-    padding: 0 3px 2px 0;
-  }
-  .dropdown dd ul {
-    background-color: #2e5e68;
-    border: 0;
-    color: #fff;
-    display: none;
-    left: 0px;
-    padding: 2px 15px 2px 5px;
-    /* position: absolute; */
-    top: 2px;
-    width: 280px;
-    list-style: none;
-    height: 100px;
-    overflow: auto;
-  }
-  .dropdown span.value {
-    display: none;
-  }
-  .dropdown dd ul li a {
-    padding: 5px;
-    display: block;
-  }
-  .dropdown dd ul li a:hover {
-    background-color: #fff;
-  }
-  button {
-    background-color: #2ab1ce;
-    width: 302px;
-    border: 0;
-    padding: 10px 0;
-    margin: 5px 0;
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-  }
-</style>
-
-<script>
-  $(".dropdown dt a").on("click", function () {
-    $(".dropdown dd ul").slideToggle("fast");
-  });
-
-  $(".dropdown dd ul li a").on("click", function () {
-    $(".dropdown dd ul").hide();
-  });
-
-  function getSelectedValue(id) {
-    return $("#" + id)
-      .find("dt a span.value")
-      .html();
-  }
-
-  $(document).bind("click", function (e) {
-    var $clicked = $(e.target);
-    if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
-  });
-
-  $('.mutliSelect input[type="checkbox"]').on("click", function () {
-    var title = $(this)
-        .closest(".mutliSelect")
-        .find('input[type="checkbox"]')
-        .val(),
-      title = $(this).val() + ",";
-
-    if ($(this).is(":checked")) {
-      var html = '<span title="' + title + '">' + title + "</span>";
-      $(".multiselct").append(html);
-      $(".hida").hide();
-    } else {
-      $('span[title="' + title + '"]').remove();
-      var ret = $(".hida");
-      $(".dropdown dt a").append(ret);
-    }
-  });
-</script>
 <style>
   .checkboxes {
     display: flex;

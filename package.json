@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "bootstrap": "^3.4.1",
     "common": "^0.2.5",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
