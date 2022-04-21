@@ -241,10 +241,13 @@ async function filters(body) {
     console.log("Pure Flix on");
     res.push("Pure Flix");
   }
-
-
   return res;
 }
+
+
+
+
+
 
 // UN COMMENT LATER
 app.use((req, res, next) => {
