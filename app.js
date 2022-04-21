@@ -95,17 +95,18 @@ app.get("/", async (req, res) => {
 
 app.post("/search", async (req, res, next) => {
   // res.send("Sanity Check")
-  let netflixCheck = req.body["netflix"];
   //   console.log(netflixCheck);
+  let prov = await filters(req.body);
   let data = await search(encodeURI(req.body.movieSearch));
   //   if (netflixCheck === "on") {
-  map = await filters(data[1]);
+  map = await services(data[1]);
   //   }
-  console.log("map from function " + map[ids[5]]);
+  console.log(prov);
   res.render("index", {
     parsedData: data[0],
     map: map,
     user: req.session.user,
+    filters: prov,
     title: `Search Results for ${encodeURI(req.body.movieSearch)} -`,
   });
 });
@@ -125,7 +126,7 @@ async function search(userSearchTerm) {
   }
 }
 
-//this fuction gets all the ID's for movies that show up in the search
+//this function gets all the ID's for movies that show up in the search
 async function getIds(parsedData) {
   console.log("length " + parsedData.length);
   ids = [];
@@ -135,8 +136,8 @@ async function getIds(parsedData) {
   return ids;
 }
 
-//This fuction creates a hashmap with movie id's as keys and the movie provider (streaming service) as values
-async function filters(ids) {
+//This function creates a hashmap with movie id's as keys and the movie provider (streaming service) as values
+async function services(ids) {
   let map = new Map();
   //   console.log("ids from filters: ", ids);
 
@@ -156,6 +157,32 @@ async function filters(ids) {
     }
   }
   return map;
+}
+async function filters(body) {
+  console.log(body);
+  res = [];
+  let netflix = body["netflix"];
+  let hulu = body["hulu"];
+  let fubo = body["fubo"];
+  let amazon = body["amazon"];
+
+  if (netflix === "on") {
+    console.log("netflix on");
+    res.push("Netflix");
+  }
+  if (hulu === "on") {
+    console.log("hulu on");
+    res.push("Hulu");
+  }
+  if (fubo === "on") {
+    console.log("fubo on");
+    res.push("fuboTV");
+  }
+  if (amazon === "on") {
+    console.log("amazon on");
+    res.push("Amazon Prime Video");
+  }
+  return res;
 }
 
 // UN COMMENT LATER
