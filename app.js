@@ -175,6 +175,10 @@ async function filters(body) {
     console.log("netflix on");
     res.push("Netflix");
   }
+  if (amazon === "on") {
+    console.log("amazon on");
+    res.push("Amazon Prime Video");
+  }
   if (hulu === "on") {
     console.log("hulu on");
     res.push("Hulu");
@@ -183,9 +187,9 @@ async function filters(body) {
     console.log("fubo on");
     res.push("fuboTV");
   }
-  if (amazon === "on") {
-    console.log("amazon on");
-    res.push("Amazon Prime Video");
+  if (ParamountPlus === "on") {
+    console.log("ParamountPlus on");
+    res.push("ParamountPlus");
   }
   if (disney === "on") {
     console.log("Disney plus on");
