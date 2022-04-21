@@ -179,6 +179,7 @@ async function filters(body) {
   let FXNow = body["FXNow"];
   let AMC = body["AMC"];
   let PureFlix = body["PureFlix"];
+  let tubi = body["tubi"];
 
   if (netflix === "on") {
     console.log("netflix on");
@@ -241,10 +242,10 @@ async function filters(body) {
     console.log("Pure Flix on");
     res.push("Pure Flix");
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> 676dea47fbaf3d34c24990df1725d3905be0db2b
+  if (tubi === "on") {
+    console.log("Tubi on");
+    res.push("Tubi TV");
+  }
   return res;
 }
 
