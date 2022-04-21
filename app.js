@@ -11,6 +11,8 @@ const flash = require("connect-flash");
 const userRoutes = require("./routes/userRoutes");
 const popularRoutes = require("./routes/popular");
 const fetch = require("node-fetch");
+const { default: axios } = require("axios");
+const { parse } = require("cookie");
 const apiKey = "b85b3c13a595dcf1d03f1878600fb10e";
 
 const urls = {
@@ -91,69 +93,69 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/search", (req, res, next) => {
+app.post("/search", async (req, res, next) => {
   // res.send("Sanity Check")
-  //empty array to hold movie search results if search is specified
-  var searchResults = [];
-  const userSearchTerm = encodeURI(req.body.movieSearch);
-  const movieUrl = `https://api.themoviedb.org/3/search/movie?query=${userSearchTerm}&api_key=1f809315a3a8c0a1456dd83615b4d783`;
-  let netflixCheck = req.body["Netflix"];
-  console.log(netflixCheck);
-  request.get(movieUrl, (error, response, movieData) => {
-    const parsedData = JSON.parse(movieData);
-
-    if (netflixCheck === "on") {
-      var count = Object.keys(parsedData.results).length;
-      for (var i = 0; i < count; i++) {
-        let providerURL =
-          "https://api.themoviedb.org/3/movie/" +
-          parsedData.results[i].id +
-          "/watch/providers?api_key=" +
-          apiKey;
-        request.get(providerURL, (error, response, providerData) => {
-          var parstedProviderData = JSON.parse(providerData);
-          if (parstedProviderData.results.US) {
-            if (parstedProviderData.results.US.flatrate !== undefined) {
-              //   for (
-              //     var j = 0;
-              //     j < parstedProviderData.results.US.flatrate.length;
-              //     j++
-              //   ) {
-              if (
-                parstedProviderData.results.US.flatrate[0].provider_name ===
-                "Netflix"
-              ) {
-                console.log(i);
-                console.log("netflix Found: this will be added:");
-                //   console.log(parsedData.results);
-                //   console.log(parsedData.results[i]);
-                var results = parsedData.results[i];
-                searchResults.push(results);
-              }
-              // console.log(
-              //   parstedProviderData.results.US.flatrate[j].provider_name
-              // );
-              //   }
-            }
-          }
-        });
-      }
-    }
-    console.log(searchResults);
-    if (searchResults) {
-      res.render("index", {
-        parsedData: searchResults,
-        user: req.session.user,
-        title: `Search Results for ${userSearchTerm} -`,
-      });
-    }
-    res.render("index", {
-      parsedData: parsedData,
-      user: req.session.user,
-      title: `Search Results for ${userSearchTerm} -`,
-    });
+  let netflixCheck = req.body["netflix"];
+  //   console.log(netflixCheck);
+  let data = await search(encodeURI(req.body.movieSearch));
+  if (netflixCheck === "on") {
+    map = await filters(data[1]);
+  }
+  console.log("map from function " + map[ids[5]]);
+  res.render("index", {
+    parsedData: data[0],
+    map: map,
+    user: req.session.user,
+    title: `Search Results for ${encodeURI(req.body.movieSearch)} -`,
   });
 });
+
+// this function does the search and returns an array of two where res is the search results and ids is an array of all the movie ids from the search
+async function search(userSearchTerm) {
+  const movieUrl = `https://api.themoviedb.org/3/search/movie?query=${userSearchTerm}&api_key=1f809315a3a8c0a1456dd83615b4d783`;
+  try {
+    const response = await axios.get(movieUrl);
+    let res = response.data;
+    let ids = await getIds(res);
+    return [res, ids];
+  } catch (error) {
+    console.log(error.response);
+  }
+}
+
+//this fuction gets all the ID's for movies that show up in the search
+async function getIds(parsedData) {
+  console.log("length " + parsedData.length);
+  ids = [];
+  for (let i = 0; i < 20; i++) {
+    ids.push(parsedData.results[i].id);
+  }
+  return ids;
+}
+
+//This fuction creates a hashmap with movie id's as keys and the movie provider (streaming service) as values
+async function filters(ids) {
+  let map = new Map();
+  //   console.log("ids from filters: ", ids);
+
+  for (var i = 0; i < ids.length; i++) {
+    let providerURL =
+      "https://api.themoviedb.org/3/movie/" +
+      ids[i] +
+      "/watch/providers?api_key=" +
+      apiKey;
+    let response = await axios.get(providerURL);
+    // console.log("response data" + response.data.us.flatrate[0].provider_name);
+    if (response.data.results.US) {
+      if (response.data.results.US.flatrate !== undefined) {
+        console.log(response.data.results.US.flatrate[0].provider_name);
+        map.set(ids[i], response.data.results.US.flatrate[0].provider_name);
+      }
+    }
+  }
+  return map;
+}
+
 // UN COMMENT LATER
 app.use((req, res, next) => {
   let err = new Error("The server cannot locate" + req.url);
