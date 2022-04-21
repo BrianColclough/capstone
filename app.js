@@ -168,6 +168,9 @@ async function filters(body) {
   let hulu = body["hulu"];
   let fubo = body["fubo"];
   let amazon = body["amazon"];
+  let DisneyPlus = body["DisneyPlus"];
+  let ParamountPlus = body["ParamountPlus"];
+  let HBOMAX = body["HBOMAX"];
 
   if (netflix === "on") {
     console.log("netflix on");
@@ -181,9 +184,17 @@ async function filters(body) {
     console.log("fubo on");
     res.push("fuboTV");
   }
-  if (amazon === "on") {
-    console.log("amazon on");
-    res.push("Amazon Prime Video");
+  if (DisneyPlus === "on") {
+    console.log("DisneyPlus on");
+    res.push("DisneyPlus");
+  }
+  if (ParamountPlus === "on") {
+    console.log("ParamountPlus on");
+    res.push("ParamountPlus");
+  }
+  if (HBOMAX === "on") {
+    console.log("HBOMAX on");
+    res.push("HBOMAX");
   }
   return res;
 }

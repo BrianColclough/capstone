@@ -8,39 +8,6 @@ body {
   padding-left: 2%;
 }
 
-
-.tabs {
-  overflow: hidden;
-  background-color: #333;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-  height: 40%;
-}
-
-.tabs a {
-  font-size: 30px;
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  border-radius: 8px;
-  padding-top: 1%;
-  padding-bottom: 1%;
-  padding-left: 1%;
-  padding-right: 1%;
-  text-decoration: none;
-}
-
-.tabs a.right {
-  float: right;
-}
-
-.tabs a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
 .flex-wrapper {
   padding: 20px;
   font-family: "Outfit", sans-serif;
@@ -52,7 +19,6 @@ body {
   align-items: baseline;
   background-color: grey;
 }
-
 .movie-container {
   display: flex;
   flex-direction: row;
@@ -170,31 +136,9 @@ button:hover {
     font-weight: bold;
 }
 
-
-
 h1 {
   text-align: center;
 }
-
-p {
-  text-align: center;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-  text-align: center;
-}
-/* .clearfix {
-  justify-self: end;
-} */
 
 body {
   margin: 0;
@@ -208,16 +152,13 @@ tr {
   border-color: inherit;
 }
 
-table,
-th,
-td {
+table, th, td {
   border: 1px solid black;
 }
 
 th {
   width: 100%;
 }
-
 
 .button2:active {
   background-color: #4d21d7;

@@ -1,59 +1,85 @@
 <%- include('../partials/header.ejs')%>
-<div class="informationProfile">
-  <h2>Welcome, <%=user.firstName%></h2>
+  <h2>Welcome <%=user.firstName%> to your Profile</h2><br>
   <%if(movieTitles.length) {%>
-  <div class="likes">
-    <div class="likes-container">
+  
       <div class ="textLike">You've Liked these <%=user.likedMovies.length%> Movies </div><br>
+        <div class="likes-container">
       <%for(let i = 0; i < movieTitles.length; i++){%>
       <div class="liked-movies">
-        <div><img class="poster" src="<%= moviePosters[i]%>" /></div>
-        <div class="textTitlesLiked"> <%=movieTitles[i]%> <%}; %></div><br>
+        <div>
+          <img class="poster" src="<%= moviePosters[i]%>" />
+        </div>
+        <div class="textTitlesLiked"> <%=movieTitles[i]%> <%}; %>
+        </div><br>
       </div>
       <% } else {%>
       <p>You have not liked any movies</p>
       <%}%>
     </div>
-  </div>
-</div>
+  
 <!-- Close open divs from header so footer is formatted correctly -->
 
-</div>
-</div>
-</div>
 <%- include('../partials/footer.ejs')%>
 
 <style>
+
+.movie-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 30px;
+  row-gap: 35px;
+  align-items: center;
+}
+.movie {
+  flex-basis: 16.666667%;
+  text-align: center;
+}
+.movie-contents-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+}
+
     .textLike{
   font-size: 130%;
+  text-align: center;
     font-weight: bold;
    
   }
-  .informationProfile {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 50%;
-    text-align: center;
-    padding: 20px;
-  }
+ 
   .likes {
     display: flex;
-    justify-content: flex-end;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 30px;
+  row-gap: 35px;
+  align-items: center;
   }
   .likes-container {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+    flex-basis: 16.666667%;
+  text-align: center;
   }
   .liked-movies {
     display: flex;
-    flex-direction: column;
-    width: 250px;
-    row-gap: 10px;
+  flex-direction: column;
+  row-gap: 3px;
   }
   .poster {
     width: 200px;
     height: 300px;
+  }
+.textTitlesLiked{
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+  h2{
+    text-align: center;
   }
 </style>
