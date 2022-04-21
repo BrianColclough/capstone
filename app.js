@@ -87,7 +87,7 @@ app.get("/", async (req, res) => {
     // load initial main movie
     const response = await fetch(popular);
     const parsedData = await response.json();
-    res.render("index", { parsedData, user: req.session.user });
+    res.render("index", { parsedData, user: req.session.user, filters: [] });
   } catch (e) {
     throw e;
   }
