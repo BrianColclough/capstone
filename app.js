@@ -241,6 +241,10 @@ async function filters(body) {
     console.log("Pure Flix on");
     res.push("Pure Flix");
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 676dea47fbaf3d34c24990df1725d3905be0db2b
   return res;
 }
 

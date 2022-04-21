@@ -64,6 +64,9 @@
             <div class="overview">
               <b> Vote Average: </b>
               <span class="meta-data"><%= Movie.vote_average %> / 10</span>
+              <% if (provider.length > 0) { %>
+              <p>Available on: <%=provider%></p>
+              <% } %>
             </div>
           </div>
         </div>
@@ -73,13 +76,12 @@
       <!-- additional-details -->
     </div>
     <!-- Card Container -->
- <br />
+    <br />
     <br />
     <!-- Poster and cast container-->
     <div class="poster-cast-container">
       <!-- Modal -->
       <div id="myModal" class="trailer-container" role="dialog">
-        
         <!-- Modal content-->
         <div class="modal-header">
           <h3 class="modal-title">Movie Clip</h3>
@@ -129,102 +131,102 @@
         </div>
       </div>
 
-  
       <!-- End Cast Description-->
     </div>
     <br />
     <br />
     <!-- End Poster and Cast Container-->
     <% if (user) {%>
-    <form action="/movie/<%= Movie.id %>/comment" class="commentForm" method="POST">
+    <form
+      action="/movie/<%= Movie.id %>/comment"
+      class="commentForm"
+      method="POST"
+    >
       <div class="commentForm-childrens">
         <label for="comments"><b>Leave a Comment</b> </label>
         <br /><br />
         <!-- <textarea id="comment" placeholder="Enter Comments here" name="comment" > </textarea> -->
-        <textarea name="comment"  id="comment"rows="7" cols="80" placeholder="Enter Comments here" style="width: 492px; height: 150px; font-size: 20px;"></textarea>
+        <textarea
+          name="comment"
+          id="comment"
+          rows="7"
+          cols="80"
+          placeholder="Enter Comments here"
+          style="width: 492px; height: 150px; font-size: 20px"
+        ></textarea>
       </div>
       <div class="clearfix">
         <button type="submitComment" class="submitComment">Submit</button>
       </div>
     </form>
-    <br /><br />  <br /><br /> 
-
-
-
-
+    <br /><br />
+    <br /><br />
 
     <!-- Comment Section -->
     <% } %> <%if(comment){%>
-      <div class="comment-container">
-    <h3>User Comments</h3>
-    <br /><br /> 
+    <div class="comment-container">
+      <h3>User Comments</h3>
+      <br /><br />
       <% for(var i = 0; i < comment.comment.length; i++) { %>
       <div class="user-comment-wrapper">
         <div class="comment-user-name"><%=comment.user[i]%></div>
         <div class="comment-body"><%=comment.comment[i]%></div>
       </div>
-  <br>
+      <br />
       <% } %>
     </div>
     <% }%>
     <!-- End Comment Section -->
 
-<style>
-  
-.commentForm{
-  font-size: 20px;
-}
+    <style>
+      .commentForm {
+        font-size: 20px;
+      }
 
-.commentForm-childrens{
-font-size: 20px;
-}
+      .commentForm-childrens {
+        font-size: 20px;
+      }
 
-.comment-container{
-    border-radius: 1rem;
-    background-color: lightgray;
-    text-align: center;
-   
-  }
+      .comment-container {
+        border-radius: 1rem;
+        background-color: lightgray;
+        text-align: center;
+      }
 
-.comment-user-name{
-  font-size: 16px;
- color: black;
- padding-right: 70%;
- font-style: italic;
- font-weight: 90;
+      .comment-user-name {
+        font-size: 16px;
+        color: black;
+        padding-right: 70%;
+        font-style: italic;
+        font-weight: 90;
+      }
 
-}
+      .comment-body {
+        font-size: 16px;
+        color: black;
+        /* font-weight:200; */
+        font-family: "Trirong", serif;
 
-.comment-body{
-  font-size: 16px;
-  color: black;
-  /* font-weight:200; */
-  font-family: "Trirong", serif;
+        /* font-family: Poppins, sans-serif; */
+      }
 
-  /* font-family: Poppins, sans-serif; */
-}
-
-.user-comment-wrapper{
-  font-size: 17px;
-  background-color: ghostwhite;
-  width: 295px;
-  border: 0;
-  padding: 3px 0px;
-  margin: 2px 37%;
-  text-align: center;
-  font-weight: bold;
-  line-height: 1.8em;
-  border-radius: 25px;
-
-}
-
-</style>
-
-
-
+      .user-comment-wrapper {
+        font-size: 17px;
+        background-color: ghostwhite;
+        width: 295px;
+        border: 0;
+        padding: 3px 0px;
+        margin: 2px 37%;
+        text-align: center;
+        font-weight: bold;
+        line-height: 1.8em;
+        border-radius: 25px;
+      }
+    </style>
 
     <!-- Recommendations -->
-    <br /><br />  <br /><br /> 
+    <br /><br />
+    <br /><br />
     <div>
       <h2>People who liked this also liked...</h2>
       <div class="reccomendations-container">
@@ -232,24 +234,22 @@ font-size: 20px;
         reco.length; i++) { %> <% Recommend.results[i].poster_path =
         'https://image.tmdb.org/t/p/w500' +Recommend.results[i].poster_path %>
         <div class="reccomendation-poster-container">
-           <a href="/movie/<%= Recommend.results[i].id %>">
-          <img
-            class="reccomendation-poster"
-            src="<%= Recommend.results[i].poster_path %>"
-            id="movie-summary-img" 
-           
-          />  </a>
+          <a href="/movie/<%= Recommend.results[i].id %>">
+            <img
+              class="reccomendation-poster"
+              src="<%= Recommend.results[i].poster_path %>"
+              id="movie-summary-img"
+            />
+          </a>
           <br />
           <h4 class="movie-name"><%= Recommend.results[i].title %></h4>
-      
         </div>
         <% } %>
       </div>
     </div>
 
     <!-- End Reccomendations-->
-  </br>
-  
+
     <!-- Currently playing  -->
     <div class="currently-playing-container">
       <h2>Currently Playing</h2>
@@ -258,124 +258,123 @@ font-size: 20px;
         'https://image.tmdb.org/t/p/w500' +currPopular.results[0].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[0].id %>">
-          <img
-            src="<%= currPopular.results[0].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-        </a>
-        <h4 class="movie-name"><%= currPopular.results[0].title %></h4>
+            <img
+              src="<%= currPopular.results[0].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[0].title %></h4>
         </div>
         <% currPopular.results[1].poster_path =
         'https://image.tmdb.org/t/p/w500' +currPopular.results[1].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[1].id %>">
-          <img
-            src="<%= currPopular.results[1].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-      </a>
-      <h4 class="movie-name"><%= currPopular.results[1].title %></h4>
+            <img
+              src="<%= currPopular.results[1].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[1].title %></h4>
         </div>
         <% currPopular.results[2].poster_path =
         'https://image.tmdb.org/t/p/w500' +currPopular.results[2].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[2].id %>">
-          <img
-            src="<%= currPopular.results[2].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-     </a>
-     <h4 class="movie-name"><%= currPopular.results[2].title %></h4>
+            <img
+              src="<%= currPopular.results[2].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[2].title %></h4>
         </div>
         <% currPopular.results[3].poster_path =
         'https://image.tmdb.org/t/p/w500' +currPopular.results[3].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[3].id %>">
-          <img
-            src="<%= currPopular.results[3].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-     </a>
-     <h4 class="movie-name"><%= currPopular.results[3].title %></h4>
+            <img
+              src="<%= currPopular.results[3].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[3].title %></h4>
         </div>
         <% currPopular.results[4].poster_path =
         'https://image.tmdb.org/t/p/w500' +currPopular.results[4].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[4].id %>">
-          <img
-            src="<%= currPopular.results[4].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-        </a>
-        <h4 class="movie-name"><%= currPopular.results[4].title %></h4>
+            <img
+              src="<%= currPopular.results[4].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[4].title %></h4>
         </div>
         <% currPopular.results[5].poster_path =
         'https://image.tmdb.org/t/p/w500' +currPopular.results[5].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[5].id %>">
-          <img
-            src="<%= currPopular.results[5].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-     </a>
-     <h4 class="movie-name"><%= currPopular.results[5].title %></h4>
+            <img
+              src="<%= currPopular.results[5].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[5].title %></h4>
         </div>
         <% currPopular.results[6].poster_path =
         'https://image.tmdb.org/t/p/w500' +currPopular.results[6].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[6].id %>">
-          <img
-            src="<%= currPopular.results[6].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-       </a>
-       <h4 class="movie-name"><%= currPopular.results[6].title %></h4>
+            <img
+              src="<%= currPopular.results[6].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[6].title %></h4>
         </div>
         <% currPopular.results[7].poster_path =
         'https://image.tmdb.org/t/p/w500' +currPopular.results[7].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[7].id %>">
-          <img
-            src="<%= currPopular.results[7].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-       </a>
-       <h4 class="movie-name"><%= currPopular.results[7].title %></h4>
+            <img
+              src="<%= currPopular.results[7].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[7].title %></h4>
         </div>
         <% currPopular.results[8].poster_path =
         'https://image.tmdb.org/t/p/w500' +currPopular.results[8].poster_path %>
         <div class="reccomendation-poster-container">
           <a href="/movie/<%= currPopular.results[8].id %>">
-          <img
-            src="<%= currPopular.results[8].poster_path %>"
-            alt=""
-            class="reccomendation-poster"
-            id="movie-summary-img"
-          />
-         </a>
-         <h4 class="movie-name"><%= currPopular.results[8].title %></h4>
+            <img
+              src="<%= currPopular.results[8].poster_path %>"
+              alt=""
+              class="reccomendation-poster"
+              id="movie-summary-img"
+            />
+          </a>
+          <h4 class="movie-name"><%= currPopular.results[8].title %></h4>
         </div>
       </div>
     </div>
     <!-- End currently playing -->
   </div>
-
 </div>
 <!-- End Flex Container-->
 <%- include('../partials/footer.ejs')%>
