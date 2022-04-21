@@ -111,6 +111,8 @@ app.post("/search", async (req, res, next) => {
 });
 
 // this function does the search and returns an array of two where res is the search results and ids is an array of all the movie ids from the search
+// axios is the new meta!! its an NPM module and we can use it with async/await to get the promises to resolve before rendering the page
+// Axios also parses the data for you so you don't have to call json.parse() or whatever on it. just do results.data and you're good to go.
 async function search(userSearchTerm) {
   const movieUrl = `https://api.themoviedb.org/3/search/movie?query=${userSearchTerm}&api_key=1f809315a3a8c0a1456dd83615b4d783`;
   try {
