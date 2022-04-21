@@ -6,11 +6,10 @@
 
 <div class="movie-container">
   <!-- we have an array! Called parsedData -->
-  <% parsedData.results.forEach((movie)=>{ %>
-  <div class="movie">
-    <% if (filters.length > 0){ %> <% if (filters.includes(map.get(movie.id))){
-    %>
+  <% parsedData.results.forEach((movie)=>{ %> <% if (filters.length > 0){ %> <%
+  if (filters.includes(map.get(movie.id))){ %>
 
+  <div class="movie">
     <div class="movie-contents-container">
       <a href="/movie/<%= movie.id %>">
         <img
@@ -21,20 +20,21 @@
       </a>
       <sub><%=map.get(movie.id)%></sub>
     </div>
-    <% } %> <% } else{ %>
-    <div class="movie-contents-container">
-      <a href="/movie/<%= movie.id %>">
-        <img
-          src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
-          alt="Movie logo"
-        />
-        <h4 class="movie-name"><%= movie.original_title %></h4>
-      </a>
-      <sub><%=map.get(movie.id)%></sub>
-    </div>
-    <% } %>
   </div>
-  <% })%>
+  <% } %> <% } else{ %>
+  <div class="movie">
+    <div class="movie-contents-container">
+      <a href="/movie/<%= movie.id %>">
+        <img
+          src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
+          alt="Movie logo"
+        />
+        <h4 class="movie-name"><%= movie.original_title %></h4>
+      </a>
+      <sub><%=map.get(movie.id)%></sub>
+    </div>
+  </div>
+  <% } %> <% })%>
 </div>
 
 <%- include('./partials/footer.ejs')%>
