@@ -168,8 +168,17 @@ async function filters(body) {
   let hulu = body["hulu"];
   let fubo = body["fubo"];
   let amazon = body["amazon"];
-  let hbo = body["hbo"];
   let disney = body["disney"];
+  let hbo = body["hbo"];
+  let paramount = body["paramount"];
+  let BroadwayHD = body["BroadwayHD"];
+  let Spectrum = body["Spectrum"];
+  let DIRECTV = body["DIRECTV"];
+  let Starz = body["Starz"];
+  let Dekkoo = body["Dekkoo"];
+  let FXNow = body["FXNow"];
+  let AMC = body["AMC"];
+  let PureFlix = body["PureFlix"];
 
   if (netflix === "on") {
     console.log("netflix on");
@@ -187,10 +196,6 @@ async function filters(body) {
     console.log("fubo on");
     res.push("fuboTV");
   }
-  if (ParamountPlus === "on") {
-    console.log("ParamountPlus on");
-    res.push("ParamountPlus");
-  }
   if (disney === "on") {
     console.log("Disney plus on");
     res.push("Disney Plus");
@@ -199,6 +204,44 @@ async function filters(body) {
     console.log("hbo max on");
     res.push("HBO Max");
   }
+  if (paramount === "on") {
+    console.log("paramount plus on");
+    res.push("Paramount Plus");
+  }
+
+  if (BroadwayHD === "on") {
+    console.log("BroadwayHD on");
+    res.push("BroadwayHD");
+  }
+  if (Spectrum === "on") {
+    console.log("Spectrum on");
+    res.push("Spectrum On Demand");
+  }
+  if (DIRECTV === "on") {
+    console.log("DIRECTV on");
+    res.push("DIRECTV");
+  }
+  if (Starz === "on") {
+    console.log("Starz on");
+    res.push("Starz Play Amazon Channel");
+  }
+  if (Dekkoo === "on") {
+    console.log("Dekkoo on");
+    res.push("Dekkoo");
+  }
+  if (FXNow === "on") {
+    console.log("FXNow on");
+    res.push("FXNow");
+  }
+  if (AMC === "on") {
+    console.log("AMC on");
+    res.push("AMC Plus");
+  }
+  if (PureFlix === "on") {
+    console.log("Pure Flix on");
+    res.push("Pure Flix");
+  }
+
   return res;
 }
 
