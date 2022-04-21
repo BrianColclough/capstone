@@ -98,9 +98,9 @@ app.post("/search", async (req, res, next) => {
   let netflixCheck = req.body["netflix"];
   //   console.log(netflixCheck);
   let data = await search(encodeURI(req.body.movieSearch));
-  if (netflixCheck === "on") {
-    map = await filters(data[1]);
-  }
+  //   if (netflixCheck === "on") {
+  map = await filters(data[1]);
+  //   }
   console.log("map from function " + map[ids[5]]);
   res.render("index", {
     parsedData: data[0],
