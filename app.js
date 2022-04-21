@@ -158,6 +158,9 @@ async function services(ids) {
   }
   return map;
 }
+
+//this function returns an array of all the streaming services that the user selected when searching.
+// we use this array to see if the movies id in the hashmap (id : provider) is also in the array of selected services
 async function filters(body) {
   console.log(body);
   res = [];
