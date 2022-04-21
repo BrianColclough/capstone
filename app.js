@@ -196,6 +196,14 @@ async function filters(body) {
     console.log("HBOMAX on");
     res.push("HBOMAX");
   }
+  if (disney === "on") {
+    console.log("Disney plus on");
+    res.push("Disney Plus");
+  }
+  if (hbo === "on") {
+    console.log("hbo max on");
+    res.push("HBO Max");
+  }
   return res;
 }
 
