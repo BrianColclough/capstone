@@ -85,30 +85,33 @@ app.get("/", async (req, res) => {
   try {
     const popular = urls.popular + apiKey;
     // load initial main movie
-    const response = await fetch(popular);
-    const parsedData = await response.json();
-    res.render("index", { parsedData, user: req.session.user, filters: [] });
+    const response = await axios.get(popular);
+    res.render("index", {
+      parsedData: response.data,
+      user: req.session.user,
+      filters: [],
+    });
   } catch (e) {
     throw e;
   }
 });
 
 app.post("/search", async (req, res, next) => {
-  // res.send("Sanity Check")
-  //   console.log(netflixCheck);
-  let prov = await filters(req.body);
-  let data = await search(encodeURI(req.body.movieSearch));
-  //   if (netflixCheck === "on") {
-  map = await services(data[1]);
-  //   }
-  console.log(prov);
-  res.render("index", {
-    parsedData: data[0],
-    map: map,
-    user: req.session.user,
-    filters: prov,
-    title: `Search Results for ${encodeURI(req.body.movieSearch)} -`,
-  });
+  try {
+    let prov = await filters(req.body);
+    let data = await search(req.body.movieSearch);
+    map = await services(data[1]);
+    res.render("index", {
+      parsedData: data[0],
+      map: map,
+      user: req.session.user,
+      filters: prov,
+      title: `Search Results for ${encodeURI(req.body.movieSearch)} -`,
+    });
+  } catch (error) {
+    console.log(error);
+    res.render("error", { error: error });
+  }
 });
 
 // this function does the search and returns an array of two where res is the search results and ids is an array of all the movie ids from the search
@@ -148,7 +151,6 @@ async function services(ids) {
       "/watch/providers?api_key=" +
       apiKey;
     let response = await axios.get(providerURL);
-    // console.log("response data" + response.data.us.flatrate[0].provider_name);
     if (response.data.results.US) {
       if (response.data.results.US.flatrate !== undefined) {
         console.log(response.data.results.US.flatrate[0].provider_name);
