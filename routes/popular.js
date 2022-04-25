@@ -5,6 +5,7 @@ const comment = require("../models/comment");
 const fetch = require("node-fetch");
 const session = require("express-session");
 const user = require("../models/user");
+const { default: axios } = require("axios");
 
 const apiKey = "b85b3c13a595dcf1d03f1878600fb10e";
 const urls = {
@@ -73,6 +74,8 @@ router.get("/:id", async (req, res) => {
     const youtube = `http://api.themoviedb.org/3/movie/${req.params.id}/videos?api_key=${apiKey}&language=en-US`;
     const recommendations = `https://api.themoviedb.org/3/movie/${req.params.id}/recommendations?api_key=${apiKey}&language=en-US&page=1`;
     // singleMovieInfo
+
+    let provider = await getService(req.params.id);
     try {
       const singleMovieRequest = await fetch(singleMovieInfo);
       var info = await singleMovieRequest.json();
@@ -123,6 +126,7 @@ router.get("/:id", async (req, res) => {
         layout: false,
         user: req.session.user,
         comment: movieComments,
+        provider: provider,
       });
     } else {
       res.render("popular/show", {
@@ -134,6 +138,7 @@ router.get("/:id", async (req, res) => {
         layout: false,
         user: req.session.user,
         comment: null,
+        provider: provider,
       });
     }
   } catch (e) {
@@ -172,5 +177,22 @@ router.get("/unliked/:id", (req, res) => {
       res.redirect("/movie/" + ID);
     });
 });
+
+async function getService(id) {
+  let res = "";
+  let providerURL =
+    "https://api.themoviedb.org/3/movie/" +
+    id +
+    "/watch/providers?api_key=" +
+    apiKey;
+  let response = await axios.get(providerURL);
+  // console.log("response data" + response.data.us.flatrate[0].provider_name);
+  if (response.data.results.US) {
+    if (response.data.results.US.flatrate !== undefined) {
+      res = response.data.results.US.flatrate[0].provider_name;
+    }
+  }
+  return res;
+}
 
 module.exports = router;

@@ -85,30 +85,33 @@ app.get("/", async (req, res) => {
   try {
     const popular = urls.popular + apiKey;
     // load initial main movie
-    const response = await fetch(popular);
-    const parsedData = await response.json();
-    res.render("index", { parsedData, user: req.session.user, filters: [] });
+    const response = await axios.get(popular);
+    res.render("index", {
+      parsedData: response.data,
+      user: req.session.user,
+      filters: [],
+    });
   } catch (e) {
     throw e;
   }
 });
 
 app.post("/search", async (req, res, next) => {
-  // res.send("Sanity Check")
-  //   console.log(netflixCheck);
-  let prov = await filters(req.body);
-  let data = await search(encodeURI(req.body.movieSearch));
-  //   if (netflixCheck === "on") {
-  map = await services(data[1]);
-  //   }
-  console.log(prov);
-  res.render("index", {
-    parsedData: data[0],
-    map: map,
-    user: req.session.user,
-    filters: prov,
-    title: `Search Results for ${encodeURI(req.body.movieSearch)} -`,
-  });
+  try {
+    let prov = await filters(req.body);
+    let data = await search(req.body.movieSearch);
+    map = await services(data[1]);
+    res.render("index", {
+      parsedData: data[0],
+      map: map,
+      user: req.session.user,
+      filters: prov,
+      title: `Search Results for ${encodeURI(req.body.movieSearch)} -`,
+    });
+  } catch (error) {
+    console.log(error);
+    res.render("error", { error: error });
+  }
 });
 
 // this function does the search and returns an array of two where res is the search results and ids is an array of all the movie ids from the search
@@ -148,7 +151,6 @@ async function services(ids) {
       "/watch/providers?api_key=" +
       apiKey;
     let response = await axios.get(providerURL);
-    // console.log("response data" + response.data.us.flatrate[0].provider_name);
     if (response.data.results.US) {
       if (response.data.results.US.flatrate !== undefined) {
         console.log(response.data.results.US.flatrate[0].provider_name);
@@ -168,10 +170,25 @@ async function filters(body) {
   let hulu = body["hulu"];
   let fubo = body["fubo"];
   let amazon = body["amazon"];
+  let disney = body["disney"];
+  let hbo = body["hbo"];
+  let paramount = body["paramount"];
+  let BroadwayHD = body["BroadwayHD"];
+  let Spectrum = body["Spectrum"];
+  let DIRECTV = body["DIRECTV"];
+  let Starz = body["Starz"];
+  let Dekkoo = body["Dekkoo"];
+  let FXNow = body["FXNow"];
+  let AMC = body["AMC"];
+  let PureFlix = body["PureFlix"];
 
   if (netflix === "on") {
     console.log("netflix on");
     res.push("Netflix");
+  }
+  if (amazon === "on") {
+    console.log("amazon on");
+    res.push("Amazon Prime Video");
   }
   if (hulu === "on") {
     console.log("hulu on");
@@ -181,10 +198,52 @@ async function filters(body) {
     console.log("fubo on");
     res.push("fuboTV");
   }
-  if (amazon === "on") {
-    console.log("amazon on");
-    res.push("Amazon Prime Video");
+  if (disney === "on") {
+    console.log("Disney plus on");
+    res.push("Disney Plus");
   }
+  if (hbo === "on") {
+    console.log("hbo max on");
+    res.push("HBO Max");
+  }
+  if (paramount === "on") {
+    console.log("paramount plus on");
+    res.push("Paramount Plus");
+  }
+
+  if (BroadwayHD === "on") {
+    console.log("BroadwayHD on");
+    res.push("BroadwayHD");
+  }
+  if (Spectrum === "on") {
+    console.log("Spectrum on");
+    res.push("Spectrum On Demand");
+  }
+  if (DIRECTV === "on") {
+    console.log("DIRECTV on");
+    res.push("DIRECTV");
+  }
+  if (Starz === "on") {
+    console.log("Starz on");
+    res.push("Starz Play Amazon Channel");
+  }
+  if (Dekkoo === "on") {
+    console.log("Dekkoo on");
+    res.push("Dekkoo");
+  }
+  if (FXNow === "on") {
+    console.log("FXNow on");
+    res.push("FXNow");
+  }
+  if (AMC === "on") {
+    console.log("AMC on");
+    res.push("AMC Plus");
+  }
+  if (PureFlix === "on") {
+    console.log("Pure Flix on");
+    res.push("Pure Flix");
+  }
+
   return res;
 }
 
