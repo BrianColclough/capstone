@@ -46,23 +46,91 @@
               placeholder="Search.."
             />
             <div class="checkboxes">
-              <input type="checkbox" name="netflix">Netflix   
-              <input type="checkbox" name="amazon">Amazon Prime   
-              <input type="checkbox" name="fubo">FuboTV   
-              <input type="checkbox" name="hulu">Hulu   
-              <input type="checkbox" name="hbo">HBO Max   
-              <input type="checkbox" name="disney">Disney+   
-              <input type="checkbox" name="paramount">Paramount +
-              <input type="checkbox" name="BroadwayHD">BroadwayHD  
-              <input type="checkbox" name="Spectrum">Spectrum  
-              <input type="checkbox" name="DIRECTV">DIRECTV 
-              <input type="checkbox" name="Dekkoo">Dekkoo
-              <input type="checkbox" name="FXNow">FXNow
-              <input type="checkbox" name="AMC">AMC
-              <input type="checkbox" name="Starz">Starz
-              <input type="checkbox" name="PureFlix">PureFlix
-              <input type="checkbox" name="tubi">Tubi
-              <head>
+              <div class = "movieWatchedOn">
+  
+<!--   Netflix -->
+<label class="container">
+  <input type="checkbox" name="netflix">Netflix 
+  <span class="checkmark"></span>
+</label>
+<!--   Amazon Prime -->
+<label class="container">
+  <input type="checkbox" name="amazon">Amazon Prime
+  <span class="checkmark"></span>
+</label>
+<!--   FuboTV -->
+<label class="container">
+  <input type="checkbox" name="fubo">FuboTV
+  <span class="checkmark"></span>
+</label>
+<!--   Hulu -->
+<label class="container">
+  <input type="checkbox"name="hulu">Hulu 
+  <span class="checkmark"></span>
+  </label>
+<!--   HBO Max  -->
+  <label class="container">
+  <input type="checkbox"name="hbo">HBO Max   
+  <span class="checkmark"></span>
+  </label>
+<!--   Disney+  -->
+    <label class="container">
+  <input type="checkbox"name="disney">Disney+ 
+  <span class="checkmark"></span>
+   </label>
+<!--   Paramount + -->
+      <label class="container">
+  <input type="checkbox"name="paramount">Paramount +
+  <span class="checkmark"></span>
+</label>
+<!--   BroadwayHD  -->
+  <label class="container">
+  <input type="checkbox"name="BroadwayHD">BroadwayHD 
+  <span class="checkmark"></span>
+    </label>
+<!--   Spectrum -->
+      <label class="container">
+  <input type="checkbox" name="Spectrum">Spectrum  
+  <span class="checkmark"></span>
+</label>
+<!--          DIRECTV -->
+      <label class="container">
+  <input type="checkbox" name="DIRECTV">DIRECTV 
+  <span class="checkmark"></span>
+</label>
+<!--          Dekkoo -->
+      <label class="container">
+  <input type="checkbox" name="Dekkoo">Dekkoo
+  <span class="checkmark"></span>
+</label>
+<!--   FXNow -->
+      <label class="container">
+  <input type="checkbox" name="FXNow">FXNow
+  <span class="checkmark"></span>
+</label>
+<!--          AMC -->
+      <label class="container">
+  <input type="checkbox"name="AMC">AMC
+  <span class="checkmark"></span>
+</label>
+<!--          Starz -->
+      <label class="container">
+  <input type="checkbox"name="Starz">Starz
+  <span class="checkmark"></span>
+</label>
+<!--          PureFlix -->
+      <label class="container">
+  <input type="checkbox"name="PureFlix">PureFlix
+  <span class="checkmark"></span>
+</label>
+<!--          Tubi -->
+      <label class="container">
+  <input type="checkbox" name="tubi">Tubi
+  <span class="checkmark"></span>
+</label>
+</div>
+  
+              <!-- <head> -->
                 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> -->
                 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
                 <!-- <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
@@ -125,3 +193,94 @@
     <%});%> <%}%>
   </body>
 </html>
+
+
+<style>
+
+  .movieWatchedOn{
+    padding: 20px;
+    font-family: "Outfit", sans-serif;
+    font-size: 1.9rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+    background-color: grey;
+    
+  }
+  .container {
+
+    display: flex;
+    /* flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 30px;
+    row-gap: 35px;
+    align-items: center;
+  display: block; */
+  position: relative;
+  padding-left: 35px;
+  /* margin-bottom: 12px; */
+  cursor: pointer;
+  font-size: 22px;
+  /* -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none; */
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+</style>
