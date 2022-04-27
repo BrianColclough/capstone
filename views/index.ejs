@@ -1,0 +1,41 @@
+<%- include('./partials/header.ejs')%> <% if (user){ %>
+<h1 class="user-greeting">Welcome to Flix.net, <%= user.userName%>:</h1>
+<% } else{ %>
+<h1>Welcome to Flix.net</h1>
+<% } %>
+
+<div class="movie-container">
+  <!-- we have an array! Called parsedData -->
+  <% parsedData.results.forEach((movie)=>{ %> <% if (filters.length > 0){ %> <%
+  if (filters.includes(map.get(movie.id))){ %>
+  <div class="movie">
+    <div class="movie-contents-container">
+      <a href="/movie/<%= movie.id %>">
+        <img
+          src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
+          alt="Movie logo"
+        />
+        <h4 class="movie-name"><%= movie.original_title %></h4>
+      </a>
+      <sub><%=map.get(movie.id)%></sub>
+    </div>
+  </div>
+  <% } %> <% } else{ %>
+  <div class="movie">
+    <div class="movie-contents-container">
+      <a href="/movie/<%= movie.id %>">
+        <img
+          src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
+          alt="Movie logo"
+        />
+        <h4 class="movie-name"><%= movie.original_title %></h4>
+      </a>
+      <% try{ %>
+      <sub><%=map.get(movie.id)%></sub>
+      <%} catch {}%>
+    </div>
+  </div>
+  <% } %> <% })%>
+</div>
+
+<%- include('./partials/footer.ejs')%>
