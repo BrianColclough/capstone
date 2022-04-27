@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width" , initial-scale="1" />
     <link rel="stylesheet" href="/stylesheets/index.css" />
     <!-- <link rel="stylesheet" href="/stylesheets/boot.css" /> -->
-     <link rel="stylesheet" href="/stylesheets/bootstrap-multiselect.css" />
-     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+      <link rel="stylesheet" href="/stylesheets/bootstrap-multiselect.css" /> 
+      <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" /> 
     <!-- <link rel="stylesheet" href="/stylesheets/boot2.css" /> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
@@ -89,20 +89,38 @@
                     <script type="text/javascript">
                         $(document).ready(function() {
                             $('#option-droup-demo').multiselect({
+                             
                             enableClickableOptGroups: true,
-                            enableCollapsibleOptGroups: true
+                            enableCollapsibleOptGroups: true,
+                            buttonContainer: '<div id="example-enableCollapsibleOptGroups-collapsed-container" />',
+                    onDropdownShown: function() {
+                        $('#example-enableCollapsibleOptGroups-collapsed-container .caret-container').click();
+                        },
+              onDropdownHidden: function() {
+                $('#example-enableCollapsibleOptGroups-collapsed-container .caret-container', 2000).click();
+               }
+               
                         });
                         });
                     </script>
                     <select id="option-droup-demo" multiple="multiple">
-                        <optgroup label="Providers"  enableCollapsibleOptGroups = "true">
-                          <option value="Netflix">Netflix</option>
-                          <option value="Prime Video">Prime Video</option>
-                          <option value="Disney +" >Disney +</option>
-                          <option value="Hulu" >Hulu</option>
-                          <option value="Paramount +">Paramount +</option>
-                           <option value="Funimation">Funimation</option>
-                           <option value="HBO Max">HBO Max</option>
+                        <optgroup label="Providers">
+                          <option value="netflix" name="netflix"  selected="selected">Netflix</option>
+                          <option value="amazon" name="amazon">Prime Video</option>
+                          <option value="fubo" name="fubo">FuboTV</option>
+                          <option value="hulu" name="hulu">Hulu</option>
+                          <option value="disney" name="disney">Disney +</option>
+                          <option value="hbo" name="hbo">HBO Max</option>
+                          <option value="paramount" name="paramount">Paramount +</option>
+                          <option value="BroadwayHD" name="BroadwayHD">BroadwayHD</option>
+                          <option value="Spectrum" name="Spectrum">Spectrum</option>
+                          <option value="DIRECTV" name="DIRECTV">DIRECTV</option>
+                          <option value="Dekkoo" name="Dekkoo">Dekkoo</option>
+                          <option value="FXNow" name="FXNow" >FXNow</option>
+                          <option value="AMC" name="AMC" >AMC</option>
+                          <option value="Starz" name="Starz">Starz</option>
+                           <option value="PureFlix" name="PureFlix">PureFlix</option>
+                           
                         </optgroup>
                         <optgroup label="Movie Genres">
                           <option value="Action">Action</option>
@@ -125,18 +143,7 @@
                 </div>
                 </div>
                 </body>
-           
-                
-                
-             
-                
-                
-
-
-<!-- 
-
-
-                  <div class="container">
+<!-- <div class="container">
                     <div class="example">
                         <script type="text/javascript">
                             $(document).ready(function() {

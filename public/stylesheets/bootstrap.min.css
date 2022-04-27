@@ -3616,6 +3616,7 @@ textarea.form-group-lg .form-control {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
+    width: 25%;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.42857143;
@@ -7781,7 +7782,7 @@ button.close {
         display: table-cell !important
     }
 }
-
+/* 
 @media (min-width:1200px) {
     .visible-lg-block {
         display: block !important
@@ -7804,9 +7805,9 @@ button.close {
     .hidden-xs {
         display: none !important
     }
-}
+} */
 
-@media (min-width:768px) and (max-width:991px) {
+/* @media (min-width:768px) and (max-width:991px) {
     .hidden-sm {
         display: none !important
     }
@@ -7822,9 +7823,9 @@ button.close {
     .hidden-lg {
         display: none !important
     }
-}
+} */
 
-.visible-print {
+/* .visible-print {
     display: none !important
 }
 
@@ -7881,4 +7882,4 @@ button.close {
     .hidden-print {
         display: none !important
     }
-}
+} */
