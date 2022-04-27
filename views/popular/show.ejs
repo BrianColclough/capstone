@@ -15,6 +15,12 @@
           <% Movie.poster_path = 'https://image.tmdb.org/t/p/w500'
           +Movie.poster_path %>
           <img class="cast-poster" src="<%= Movie.poster_path %>" />
+          <br>
+          <% if (provider.length > 0) { %>
+            <p3>Available on: <%=provider%></p3>
+            <% } else { %>
+              <p3>Currently in the theaters</p3>
+              <% } %>
         </div>
         <div class="details-container">
           <span class="tagline">
@@ -64,9 +70,7 @@
             <div class="overview">
               <b> Vote Average: </b>
               <span class="meta-data"><%= Movie.vote_average %> / 10</span>
-              <% if (provider.length > 0) { %>
-              <p>Available on: <%=provider%></p>
-              <% } %>
+             
             </div>
           </div>
         </div>
@@ -161,7 +165,6 @@
     </form>
     <br /><br />
     <br /><br />
-
     <!-- Comment Section -->
     <% } %> <%if(comment){%>
     <div class="comment-container">
@@ -182,17 +185,14 @@
       .commentForm {
         font-size: 20px;
       }
-
       .commentForm-childrens {
         font-size: 20px;
       }
-
       .comment-container {
         border-radius: 1rem;
         background-color: lightgray;
         text-align: center;
       }
-
       .comment-user-name {
         font-size: 16px;
         color: black;
@@ -200,16 +200,13 @@
         font-style: italic;
         font-weight: 90;
       }
-
       .comment-body {
         font-size: 16px;
         color: black;
         /* font-weight:200; */
         font-family: "Trirong", serif;
-
         /* font-family: Poppins, sans-serif; */
       }
-
       .user-comment-wrapper {
         font-size: 17px;
         background-color: ghostwhite;
@@ -221,6 +218,14 @@
         font-weight: bold;
         line-height: 1.8em;
         border-radius: 25px;
+      }
+      p3{
+        /* padding-right: 70%; */
+        line-height: 3em;
+         padding-left: 14%; 
+        font-weight: bold;
+        padding: -2px 40px;
+ 
       }
     </style>
 
@@ -425,8 +430,13 @@
   .production-details {
     padding-bottom: 0.5rem;
   }
+  /* This shows where the movie is avaible on when you click on the poster */
   .poster-flex {
     flex-basis: 20%;
+    background-color: lightsalmon;
+    /* background-color: lightgoldenrodyellow; */
+    border-radius: 25px;
+    width:100%;
   }
   .cast {
     display: flex;
