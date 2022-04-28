@@ -7,9 +7,14 @@
         <div class="likes-container">
       <%for(let i = 0; i < movieTitles.length; i++){%>
       <div class="liked-movies">
-        <div class="imagePoster">
+       
+          <a href="/moviePosters/liked/<%= moviePosters.id %>">
           <img class="poster" src="<%= moviePosters[i]%>" />
+          </a>
         </div>
+      
+        The server cannot locate/moviePosters/liked/
+
         <h4> <%=movieTitles[i]%>  </h4>
           <%}; %>
        <br>
