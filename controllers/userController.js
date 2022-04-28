@@ -4,7 +4,7 @@ const model = require("../models/user");
 const rsvpModel = require("../models/rsvp");
 const Connection = require("../models/connection");
 const fetch = require("node-fetch");
-const comment = require('../models/comment');
+const comment = require("../models/comment");
 const urls = {
   movieInfobyTitle: "https://api.themoviedb.org/3/search/movie?api_key=",
   singleMovieInfo: "https://api.themoviedb.org/3/movie/",
@@ -15,13 +15,9 @@ exports.new = (req, res) => {
   return res.render("./user/new");
 };
 
-exports.add = (req, res)=>{
-  res.render('./movie/id');
+exports.add = (req, res) => {
+  res.render("./movie/id");
 };
-
-
-
-
 
 exports.create = (req, res, next) => {
   let user = new model(req.body);
@@ -88,6 +84,7 @@ exports.profile = async (req, res, next) => {
   try {
     movieTitles = [];
     moviePosters = [];
+    movieIDS = [];
     for (let i = 0; i < req.session.user.likedMovies.length; i++) {
       const singleMovieInfo = `${
         urls.singleMovieInfo + req.session.user.likedMovies[i]
@@ -100,6 +97,7 @@ exports.profile = async (req, res, next) => {
 
         // if movie is not already in the list then add it
         if (!movieTitles.includes(info.original_title)) {
+          movieIDS.push(info.id);
           movieTitles.push(info.original_title);
           moviePosters.push(
             "https://image.tmdb.org/t/p/w500" + info.poster_path
@@ -117,6 +115,7 @@ exports.profile = async (req, res, next) => {
     user: req.session.user,
     movieTitles: movieTitles,
     moviePosters: moviePosters,
+    movieIds: movieIDS,
   });
 };
 
