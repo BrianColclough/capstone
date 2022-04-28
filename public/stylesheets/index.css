@@ -58,7 +58,7 @@ body {
   padding: 20px;
   display: flex;
   justify-content: start;
-  flex-basis: 50vw;
+  /* flex-basis: 50vw; */
 }
 .nav {
   display: flex;
