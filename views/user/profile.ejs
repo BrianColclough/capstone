@@ -10,78 +10,51 @@
 <div class="likes-container">
   <%for(let i = 0; i < movieTitles.length; i++){%>
   <div class="liked-movies">
-    <div>
-      <a href="/movie/<%=movieIds[i]%>">
-        <img class="poster" src="<%= moviePosters[i]%>" />
-      </a>
-    </div>
-    <div class="textTitlesLiked"><%=movieTitles[i]%> <%}; %></div>
-    <br />
+    <a href="/movie/<%=movieIds[i]%>">
+      <img class="poster" src="<%= moviePosters[i]%>" />
+    </a>
+    <p class="textTitlesLiked"><%=movieTitles[i]%></p>
   </div>
-  <% } else {%>
-  <p>You have not liked any movies</p>
-  <%}%>
+  <%}; %>
 </div>
-
+<% } else {%>
+<p>You have not liked any movies</p>
+<%}%>
 <!-- Close open divs from header so footer is formatted correctly -->
 
 <%- include('../partials/footer.ejs')%>
 
 <style>
-  .movie-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    column-gap: 30px;
-    row-gap: 35px;
-    align-items: center;
-  }
-  .movie {
-    flex-basis: 16.666667%;
-    text-align: center;
-  }
-  .movie-contents-container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 3px;
-  }
-
-  .textLike {
-    font-size: 130%;
+  .textTitlesLiked {
     text-align: center;
     font-weight: bold;
+    width: 100%;
   }
-
-  .likes {
+  .textLike {
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+  }
+  .likes-container {
+    width: 100vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    column-gap: 30px;
-    row-gap: 35px;
+    justify-content: flex-start;
     align-items: center;
-  }
-  .likes-container {
-    flex-basis: 16.666667%;
-    text-align: center;
+    width: 100%;
   }
   .liked-movies {
     display: flex;
     flex-direction: column;
-    row-gap: 3px;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 30.3333%;
+    margin: 10px;
   }
   .poster {
     width: 200px;
     height: 300px;
-  }
-  .textTitlesLiked {
-    display: block;
-    margin-block-start: 1.33em;
-    margin-block-end: 1.33em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
   }
   h2 {
     text-align: center;
