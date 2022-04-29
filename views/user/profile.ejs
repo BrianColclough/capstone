@@ -7,15 +7,17 @@
   You've Liked these <%=user.likedMovies.length%> Movies
 </div>
 <br />
-<div class="likes-container">
-  <%for(let i = 0; i < movieTitles.length; i++){%>
-  <div class="liked-movies">
-    <a href="/movie/<%=movieIds[i]%>">
-      <img class="poster" src="<%= moviePosters[i]%>" />
-    </a>
-    <p class="textTitlesLiked"><%=movieTitles[i]%></p>
+<div class="page-container">
+  <div class="likes-container">
+    <%for(let i = 0; i < movieTitles.length; i++){%>
+    <div class="liked-movies">
+      <a href="/movie/<%=movieIds[i]%>">
+        <img class="poster" src="<%= moviePosters[i]%>" />
+      </a>
+      <p class="textTitlesLiked"><%=movieTitles[i]%></p>
+    </div>
+    <%}; %>
   </div>
-  <%}; %>
 </div>
 <% } else {%>
 <p>You have not liked any movies</p>
@@ -29,6 +31,12 @@
     text-align: center;
     font-weight: bold;
     width: 100%;
+  }
+  .page-container {
+    position: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
   }
   .likes-container {
     width: 100vw;
