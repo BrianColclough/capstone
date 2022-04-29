@@ -93,7 +93,6 @@ exports.profile = async (req, res, next) => {
         // get the movie info and put it into json format
         const singleMovieRequest = await fetch(singleMovieInfo);
         var info = await singleMovieRequest.json();
-        console.log(info);
 
         // if movie is not already in the list then add it
         if (!movieTitles.includes(info.original_title)) {
