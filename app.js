@@ -24,6 +24,26 @@ const urls = {
   movieInfobyTitle: "https://api.themoviedb.org/3/search/movie?api_key=",
   youtubeVideo: "https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=",
 };
+const genreIDs = {
+  12: "Action",
+  16: "Animation",
+  35: "Comedy",
+  80: "Crime",
+  99: "Documentary",
+  18: "Drama",
+  10751: "Family",
+  14: "Fantasy",
+  36: "History",
+  27: "Horror",
+  10402: "Music",
+  9648: "Mystery",
+  10749: "Romance",
+  878: "Science Fiction",
+  10770: "TV Movie",
+  53: "Thriller",
+  10752: "War",
+  37: "Western",
+};
 
 //create app
 const app = express();
@@ -90,6 +110,7 @@ app.get("/", async (req, res) => {
       parsedData: response.data,
       user: req.session.user,
       filters: [],
+      genre: [],
     });
   } catch (e) {
     throw e;
@@ -99,10 +120,13 @@ app.get("/", async (req, res) => {
 app.post("/search", async (req, res, next) => {
   try {
     let prov = await filters(req.body);
+    let genre = await getGenre(req.body);
     let data = await search(req.body.movieSearch);
     map = await services(data[1]);
     res.render("index", {
       parsedData: data[0],
+      genreIDs: genreIDs,
+      genre: genre || null,
       map: map,
       user: req.session.user,
       filters: prov,
@@ -242,6 +266,30 @@ async function filters(body) {
   if (PureFlix === "on") {
     console.log("Pure Flix on");
     res.push("Pure Flix");
+  }
+
+  return res;
+}
+
+async function getGenre(body) {
+  console.log(body);
+  res = [];
+  let action = body["action"];
+  let horror = body["horror"];
+  let animation = body["animation"];
+  let comedy = body["comedy"];
+
+  if (action === "on") {
+    res.push("Action");
+  }
+  if (horror === "on") {
+    res.push("Horror");
+  }
+  if (animation === "on") {
+    res.push("Animation");
+  }
+  if (comedy === "on") {
+    res.push("Comedy");
   }
 
   return res;
