@@ -6,8 +6,41 @@
 
 <div class="movie-container">
   <!-- we have an array! Called parsedData -->
-  <% parsedData.results.forEach((movie)=>{ %> <% if (filters.length > 0){ %> <%
-  if (filters.includes(map.get(movie.id))){ %>
+  <% parsedData.results.forEach((movie)=>{ %>
+  <!-- if user is searching for both a genre and a streaming service  -->
+  <% if (genre.length > 0 && filters.length>0){%> <%if
+  (filters.includes(map.get(movie.id)) &&
+  (genre.includes(genreIDs[movie.genre_ids[0]] ||
+  genre.includes(genreIDs[movie.genre_ids[1]])))){%>
+  <div class="movie">
+    <div class="movie-contents-container">
+      <a href="/movie/<%= movie.id %>">
+        <img
+          src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
+          alt="Movie logo"
+        />
+        <h4 class="movie-name"><%= movie.original_title %></h4>
+      </a>
+      <sub><%=map.get(movie.id)%></sub>
+    </div>
+  </div>
+  <%}%> <% } else if (genre.length > 0){%> <%if
+  (genre.includes(genreIDs[movie.genre_ids[0]])||
+  genre.includes(genreIDs[movie.genre_ids[1]])){%>
+  <div class="movie">
+    <div class="movie-contents-container">
+      <a href="/movie/<%= movie.id %>">
+        <img
+          src="<%= 'http://image.tmdb.org/t/p/w300' + movie.poster_path %>"
+          alt="Movie logo"
+        />
+        <h4 class="movie-name"><%= movie.original_title %></h4>
+      </a>
+      <sub><%=map.get(movie.id)%></sub>
+    </div>
+  </div>
+  <%}%> <% } else if (filters.length > 0){ %> <%if
+  (filters.includes(map.get(movie.id))){ %>
   <div class="movie">
     <div class="movie-contents-container">
       <a href="/movie/<%= movie.id %>">
@@ -37,5 +70,9 @@
   </div>
   <% } %> <% })%>
 </div>
-
+<style>
+  h4 {
+    margin-bottom: 5px;
+  }
+</style>
 <%- include('./partials/footer.ejs')%>
