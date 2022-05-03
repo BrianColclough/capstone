@@ -9,9 +9,9 @@
   <% parsedData.results.forEach((movie)=>{ %>
   <!-- if user is searching for both a genre and a streaming service  -->
   <% if (genre.length > 0 && filters.length>0){%> <%if
-  ((genre.includes(genreIDs[movie.genre_ids[0]] ||
-  genre.includes(genreIDs[movie.genre_ids[1]]))) &&
-  filters.includes(map.get(movie.id)) ){%>
+  (filters.includes(map.get(movie.id)) &&
+  (genre.includes(genreIDs[movie.genre_ids[0]] ||
+  genre.includes(genreIDs[movie.genre_ids[1]])))){%>
   <div class="movie">
     <div class="movie-contents-container">
       <a href="/movie/<%= movie.id %>">
@@ -25,7 +25,8 @@
     </div>
   </div>
   <%}%> <% } else if (genre.length > 0){%> <%if
-  (genre.includes(genreIDs[movie.genre_ids[0]])){%>
+  (genre.includes(genreIDs[movie.genre_ids[0]])||
+  genre.includes(genreIDs[movie.genre_ids[1]])){%>
   <div class="movie">
     <div class="movie-contents-container">
       <a href="/movie/<%= movie.id %>">
