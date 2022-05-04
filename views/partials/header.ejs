@@ -14,6 +14,11 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins"
     />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
     <title>Flix.Net</title>
   </head>
   <body>
@@ -51,37 +56,99 @@
               id="movieSearch"
               placeholder="Search.."
             />
-            <div class="checkboxes">
-              <input type="checkbox" name="netflix" />Netflix
-              <input type="checkbox" name="amazon" />Amazon Prime
-              <input type="checkbox" name="fubo" />FuboTV
-              <input type="checkbox" name="hulu" />Hulu
-              <input type="checkbox" name="hbo" />HBO Max
-              <input type="checkbox" name="disney" />Disney+
-              <input type="checkbox" name="paramount" />Paramount +
-              <input type="checkbox" name="BroadwayHD" />BroadwayHD
-              <input type="checkbox" name="Spectrum" />Spectrum
-              <input type="checkbox" name="DIRECTV" />DIRECTV
-              <input type="checkbox" name="Dekkoo" />Dekkoo
-              <input type="checkbox" name="FXNow" />FXNow
-              <input type="checkbox" name="AMC" />AMC
-              <input type="checkbox" name="Starz" />Starz
-              <input type="checkbox" name="PureFlix" />PureFlix
-            </div>
-            <div>
-              <input type="checkbox" name="action" />Action
-              <input type="checkbox" name="horror" />Horror
-              <input type="checkbox" name="animation" />Animation
-              <input type="checkbox" name="comedy" />Comedy
-              <head>
-                <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> -->
-                <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-                <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-              </head>
-            </div>
             <input type="submit" value="Submit" />
+            <div class="dropdown-container">
+              <div class="checkbox-dropdown">
+                Choose Streaming Service
+                <ul class="checkbox-dropdown-list">
+                  <li>
+                    <label>
+                      <input type="checkbox" name="netflix" />Netflix</label
+                    >
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="amazon" />Amazon Prime</label
+                    >
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="paramount" />Paramount +
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="disney" />Disney+
+                    </label>
+                  </li>
+                  <li>
+                    <label> <input type="checkbox" name="hbo" />HBO Max</label>
+                  </li>
+                  <li>
+                    <label> <input type="checkbox" name="fubo" />FuboTV</label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="PureFlix" />PureFlix
+                    </label>
+                  </li>
+                  <li>
+                    <label> <input type="checkbox" name="Starz" />Starz </label>
+                  </li>
+                  <li>
+                    <label> <input type="checkbox" name="AMC" />AMC </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="Dekkoo" />Dekkoo
+                    </label>
+                  </li>
+                  <li>
+                    <label> <input type="checkbox" name="FXNow" />FXNow </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="DIRECTV" />DIRECTV
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="Spectrum" />Spectrum
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="BroadwayHD" />BroadwayHD
+                    </label>
+                  </li>
+                </ul>
+              </div>
+              <div class="checkbox-dropdown">
+                Choose Genre
+                <ul class="checkbox-dropdown-list">
+                  <li>
+                    <label>
+                      <input type="checkbox" name="action" />Action
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="horror" />Horror
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="animation" />Animation
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="checkbox" name="comedy" />Comedy
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </form>
         </div>
         <%}%>
@@ -96,3 +163,86 @@
     <%});%> <%}%>
   </body>
 </html>
+<script>
+  $(".checkbox-dropdown").click(function () {
+    $(this).toggleClass("is-active");
+  });
+
+  $(".checkbox-dropdown ul").click(function (e) {
+    e.stopPropagation();
+  });
+</script>
+<style>
+  .dropdown-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+  .checkbox-dropdown {
+    font-size: 12px;
+    width: 200px;
+    border: 1px solid #aaa;
+    padding: 10px;
+    position: relative;
+    margin: 0 auto;
+
+    user-select: none;
+  }
+
+  /* Display CSS arrow to the right of the dropdown text */
+  .checkbox-dropdown:after {
+    content: "";
+    height: 0;
+    position: absolute;
+    width: 0;
+    border: 6px solid transparent;
+    border-top-color: #000;
+    top: 50%;
+    right: 10px;
+    margin-top: -3px;
+  }
+
+  /* Reverse the CSS arrow when the dropdown is active */
+  .checkbox-dropdown.is-active:after {
+    border-bottom-color: #000;
+    border-top-color: #fff;
+    margin-top: -9px;
+  }
+
+  .checkbox-dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%; /* align the dropdown right below the dropdown text */
+    border: inherit;
+    border-top: none;
+    left: -1px; /* align the dropdown to the left */
+    right: -1px; /* align the dropdown to the right */
+    opacity: 0; /* hide the dropdown */
+
+    transition: opacity 0.4s ease-in-out;
+    height: 100px;
+    overflow: scroll;
+    overflow-x: hidden;
+    pointer-events: none; /* avoid mouse click events inside the dropdown */
+  }
+  .is-active .checkbox-dropdown-list {
+    opacity: 1; /* display the dropdown */
+    pointer-events: auto; /* make sure that the user still can select checkboxes */
+  }
+
+  .checkbox-dropdown-list li label {
+    display: block;
+    border-bottom: 1px solid silver;
+    padding: 10px;
+    background-color: #aaa;
+    transition: all 0.2s ease-out;
+  }
+
+  .checkbox-dropdown-list li label:hover {
+    background-color: rgb(180, 49, 49);
+    color: white;
+  }
+</style>

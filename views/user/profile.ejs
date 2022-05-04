@@ -1,12 +1,10 @@
 <%- include('../partials/header.ejs')%>
 <h2>Welcome <%=user.firstName%> to your Profile</h2>
-<br />
 <%if(movieTitles.length) {%>
 
 <div class="textLike">
   You've Liked these <%=user.likedMovies.length%> Movies
 </div>
-<br />
 <div class="page-container">
   <div class="likes-container">
     <%for(let i = 0; i < movieTitles.length; i++){%>
